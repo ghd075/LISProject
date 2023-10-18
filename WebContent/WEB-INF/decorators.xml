@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/layout">
+    <decorator name="basic-theme" page="layout.jsp">
+        <pattern>/main/*</pattern>
+        <pattern>/qna/*</pattern>
+        <pattern>/notice/*</pattern>
+        <pattern>/intro/*</pattern>
+        <pattern>/*</pattern>
+    </decorator>
+</decorators>
