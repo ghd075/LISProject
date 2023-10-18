@@ -91,7 +91,7 @@
 
 						<!-- 책 검색에서 제목 받아서 디테일북으로 옮기게 동적노드 생성 1단계 시작 -->
 						var book_title = msg.documents[i].title;
-						var a_href = $('<a href="detailBook.do?b_no=1&query='+book_title+'"></a>');
+						var a_href = $('<a href="'+ contextPath +'book/detailBook.do?b_no=1&query='+book_title+'"></a>');
 						<!-- 책검색에서 제목 받아서 디테일북으로 옮기게 동적노드 생성 1단계 종료 -->
 
 						var img = $('<img>').attr('src', msg.documents[i].thumbnail);
