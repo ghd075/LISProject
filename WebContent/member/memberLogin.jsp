@@ -23,19 +23,26 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Noto+Serif+KR:wght@200;300&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<title>도서 통합 정보 시스템</title>
+<!-- sweetalert2 사용 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<title>도서 통합 정보 시스템 - 로그인</title>
+<script>
+ function goLogin(){
+	 
+		var frm=document.login_frm;
+			frm.action="<c:url value='/member/memberLoginF.do'/>";
+			frm.method = "post";
+			frm.submit();
+		}
+ </script>
 </head>
 <body>
 
 	<form name="login_frm" class="form_wrap">
-		<div class="register_res">
-			<c:if test="${not empty login_error}">
-				${login_error }
-			</c:if>
-			<c:if test="${not empty register_ok}">
-				${register_ok}
-			</c:if>
-		</div>
+		<c:if test="${not empty login_error}">
+			Swal.fire('${login_error}', '', 'error');
+		</c:if>
 		<!-- 타이틀 -->
 		<h1 class="heroTitle">
 			<span class="heroTitle_dot"><i class="fas fa-book-open"></i></span>&nbsp;&nbsp; <span class="heroTitle_kor">로그인</span>

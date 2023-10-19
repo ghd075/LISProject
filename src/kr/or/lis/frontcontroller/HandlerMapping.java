@@ -23,6 +23,8 @@ public class HandlerMapping {
 	  mappings.put("/member/memberIdSearch.do", new IdSearchController());			// ID찾기 화면 이동
 	  mappings.put("/member/memberPwSearch.do", new PwSearchController());			// 비밀번호찾기 화면 이동
 	  
+	  mappings.put("/member/memberLoginF.do", new MemberLoginController());			//로그인 기능
+	  
 	  /**
 	   * 도서관 소개 페이지 관련
 	   */

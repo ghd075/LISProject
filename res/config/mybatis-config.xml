@@ -21,8 +21,8 @@
 	-->
 	
 	<typeAliases>
-<!-- 		<typeAlias type="kr.or.lis.vo.MemberVO" alias="memVo"/> -->
 		<typeAlias type="kr.or.lis.vo.NoticeVO" alias="NoticeVO"/>
+		<typeAlias type="kr.or.lis.vo.MemberVO" alias="MemberVO"/>
 	</typeAliases>
 	
 	<!-- DB연결 설정 -->
