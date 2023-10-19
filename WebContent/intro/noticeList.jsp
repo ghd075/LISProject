@@ -107,75 +107,65 @@ function goSearch(){
 					공지사항 <span class="tit_sub"> 최신 LIS의 소식을 보실 수 있습니다. </span>
 				</h2>
 			</div>
+			
 			<table width="100%" class="text-center" cellpadding="0" cellspacing="0">
-				<tbody>
-					<tr>
-						<td>
-							<div class="section_t">
-								<table width="100%" class="board-listheader" cellpadding="0"
-									cellspacing="0">
-									<thead>
-										<tr>
-											<th>No.</th>
-											<th>제목</th>
-											<th>등록일</th>
-											<th>조회수</th>
-										</tr>
-									</thead>
-									<tbody>
-										<!--목록 뿌리기 -->
-										<c:if test="${not empty noticeList}">
-											<!--변경 : el태그 - servlet이랑 맞추기 -->
-											<c:forEach items="${noticeList}" var="v" varStatus="s">
-												<!--변경 : el태그 - servlet이랑 맞추기 -->
-												<tr>
-													<td>${v.nno}</td>
-													<td><a
-														href="${ctx}/intro/noticeDetail.do?nno=${v.nno}&pageNum=${s.count}">${v.ntitle}</a></td>
-													<td><fmt:formatDate value="${v.ndate}"
-															pattern="yyyy-MM-dd" var="date" /> ${date}</td>
-													<td>${v.nview}</td>
-												</tr>
-											</c:forEach>
-										</c:if>
-									</tbody>
-								</table>
-							</div>
-						</td>
-						<td></td>
-					</tr>
-				</tbody>
+			    <tbody>
+			        <tr>
+			            <td>
+			                <div class="section_t">
+			                    <table width="100%" class="board-listheader" cellpadding="0" cellspacing="0">
+			                        <thead>
+			                            <tr>
+			                                <th>No.</th>
+			                                <th>제목</th>
+			                                <th>등록일</th>
+			                                <th>조회수</th>
+			                            </tr>
+			                        </thead>
+			                        <tbody>
+			                            <c:choose>
+			                                <c:when test="${empty noticeList}">
+			                                    <tr>
+			                                        <td colspan="4">검색결과가 없습니다.</td>
+			                                    </tr>
+			                                </c:when>
+			                                <c:otherwise>
+			                                    <c:forEach items="${noticeList}" var="v" varStatus="s">
+			                                        <tr>
+			                                            <td>${v.nno}</td>
+			                                            <td><a href="${ctx}/intro/noticeDetail.do?nno=${v.nno}&pageNum=${s.count}">${v.ntitle}</a></td>
+			                                            <td><fmt:formatDate value="${v.ndate}" pattern="yyyy-MM-dd" var="date" /> ${date}</td>
+			                                            <td>${v.nview}</td>
+			                                        </tr>
+			                                    </c:forEach>
+			                                </c:otherwise>
+			                            </c:choose>
+			                        </tbody>
+			                    </table>
+			                </div>
+			            </td>
+			            <td></td>
+			        </tr>
+			    </tbody>
 			</table>
 
 			<!--페이징 아래 숫자-->
 			<div class="layout-pagination">
 			    <div class="pagediv">
 			        <c:choose>
-			            <c:when test="${startPage != 1}">
-			                <a href="${ctx}/intro/noticeList.do?pageNum=${prev}"
-			                    class="layout-pagination-button layout-back"><</a>
+			            <c:when test="${pageCount > 1}">
+			                <a href="${ctx}/intro/noticeList.do?pageNum=1" class="layout-pagination-button layout-back"><</a>
 			            </c:when>
 			            <c:otherwise>
 			                <span class="layout-pagination-button layout-back disabled"><</span>
 			            </c:otherwise>
 			        </c:choose>
 			
-			        <c:forEach varStatus="s" begin="${startPage}" end="${endPage}" step="1">
-			            <c:choose>
-			                <c:when test="${s.current == PageNum}">
-			                    <span class="layout-pagination-button current">${s.current}</span>
-			                </c:when>
-			                <c:otherwise>
-			                    <a href="${ctx}/intro/noticeList.do?pageNum=${s.current}"
-			                        class="layout-pagination-button">${s.current}</a>
-			                </c:otherwise>
-			            </c:choose>
-			        </c:forEach>
+			        <span class="layout-pagination-button current">1</span>
 			
 			        <c:choose>
-			            <c:when test="${next <= pageCount && pageCount > 1}">
-			                <a href="${ctx}/intro/noticeList.do?pageNum=${next}"
-			                    class="layout-pagination-button layout-next">></a>
+			            <c:when test="${pageCount > 1}">
+			                <a href="${ctx}/intro/noticeList.do?pageNum=2" class="layout-pagination-button layout-next">></a>
 			            </c:when>
 			            <c:otherwise>
 			                <span class="layout-pagination-button layout-next disabled">></span>

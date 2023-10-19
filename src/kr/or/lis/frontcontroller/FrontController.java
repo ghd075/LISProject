@@ -1,7 +1,6 @@
 package kr.or.lis.frontcontroller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,16 +43,7 @@ public class FrontController extends HttpServlet {
 		if(nextPage != null) {
 			if(nextPage.indexOf("redirect:")!=-1) {
 				//            redirect:/MVC04/memberList.do
-				String searchError = request.getAttribute("search_error").toString();
-//				response.sendRedirect(nextPage.split(":")[1]+"?search_error=" + searchError); // redirect
-				
-				if (searchError != null && !searchError.isEmpty()) {
-				    String encodedSearchError = URLEncoder.encode(searchError, "UTF-8");
-				    response.sendRedirect(nextPage.split(":")[1] + "?search_error=" + encodedSearchError);
-				} else {
-				    response.sendRedirect(nextPage.split(":")[1]);
-				}
-				
+				response.sendRedirect(nextPage.split(":")[1]);
 			}else {
 				RequestDispatcher rd=request.getRequestDispatcher(ViewResolver.makeView(nextPage)); // forward
 				rd.forward(request, response);
