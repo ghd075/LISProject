@@ -202,14 +202,15 @@ ul.navi li a:hover {
 				<c:if test="${not empty member}">
 					<c:if test="${member.authority eq 0}">
 						<ul>
-							<li><a href="${ctx}/MyOrderList.do">마이페이지</a></li>
-							<li><a href="${ctx}/memberLogout.do">로그아웃</a></li>
+							<li>${member.mname}님</li>
+							<li><a href="${ctx}/member/MyOrderList.do">마이페이지</a></li>
+							<li><a href="${ctx}/member/memberLogout.do">로그아웃</a></li>
 						</ul>
 					</c:if>
 					<c:if test="${member.authority eq 1}">
 						<ul>
-							<li><a href="${ctx}/memberList.do">회원관리</a></li>
-							<li><a href="${ctx}/memberLogout.do">로그아웃</a></li>
+							<li><a href="${ctx}/member/memberList.do">회원관리</a></li>
+							<li><a href="${ctx}/member/memberLogout.do">로그아웃</a></li>
 						</ul>
 					</c:if>
 				</c:if>

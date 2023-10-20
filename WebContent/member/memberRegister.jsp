@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>도서 통합 정보 시스템</title>
+<title>도서 통합 정보 시스템 - 회원가입</title>
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!-- 카카오 주소 API사용 -->
@@ -22,13 +22,18 @@
 	rel="stylesheet" type="text/css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-</head>
 
+<!-- sweetalert2 사용 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>	
+</head>
 
 <body>
 	<div class="register_res">
 		<c:if test="${not empty register_fail}">
-			<script>  </script>
+			<script>  
+			Swal.fire('${register_fail}', '', 'error');
+			</script>
 		</c:if>
 	</div>
 	<div class="form_wrap">
@@ -55,20 +60,56 @@
 					</tr>
 					<script type="text/javascript">
 						//아이디
-						var idreg=false;
-						var iddbchk=0;
+						var idreg = false;
+						var iddbchk = 0;
 						$("#mid").on("input", function() {
 							var a = $("#mid").val();
 							var regex = /[A-Za-z0-9]{5,20}/;
 							if (!regex.exec(a)) {
-								idreg=false;
+								idreg = false;
 								$("#id_res").html("아이디 형식이 맞지 않습니다");
 								return;
-							} else{
-								idreg=true;
+							} else {
+								idreg = true;
 								$("#id_res").html("아이디 형식이 맞습니다.");
 							}
 						});
+						
+						$("#idDoubleChk").on("click", function() {
+						    var midValue = $("#mid").val();
+
+						    if (midValue === "") {
+						        Swal.fire('아이디를 입력해주세요.', '', 'warning');
+						        return; // 아이디가 비어있을 때 처리 중단
+						    }							
+							
+							$.ajax({
+								type : 'post',
+								url : "<c:url value='/member/CheckId.do'/>",
+								data : {
+									mid : midValue
+								},
+								success : function(res) {
+									if(res == 1){
+										//사용가능
+										iddbchk = 1;
+										Swal.fire('사용가능한 아이디입니다.', '', 'success');
+									}else if(res == 0){
+										iddbchk = 2;
+										Swal.fire('이미 사용중인 아이디입니다.', '', 'warning');
+									}else{
+										Swal.fire(res, '', 'warning');
+									}
+								},
+								error : function(jqXHR,textStatus, errorThrown) {
+									//alert('오류가 발생했습니다');
+									Swal.fire('오류가 발생했습니다', '', 'error');
+									console.log(jqXHR.status);
+									console.log(textStatus);
+									console.log(errorThrown);
+								}
+							});
+						});								
 					</script>
 					<tr>
 						<th>비밀번호<span id="ico">*</span></th>
@@ -93,11 +134,11 @@
 							var a = $("#mpw").val();
 							var regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 							if (!regex.exec(a)) {
-								pwreg=false;
+								pwreg = false;
 								$("#pw_res").html('비밀번호 형식이 맞지않습니다.');
 								return;
 							} else {
-								pwreg=true;
+								pwreg = true;
 								$("#pw_res").html('비밀번호 형식이 맞습니다.');
 							}});
 
@@ -107,7 +148,8 @@
 							if (pw1 != "" && pw2 != "") {
 								{
 									if (pw1 != pw2) {
-										alert('비밀번호 동일하게 입력해주세요');
+										Swal.fire('비밀번호를 동일하게 입력해주세요', '', 'warning');/
+										/alert('비밀번호 동일하게 입력해주세요');
 										$("#mpw").focus();
 										$("#mpw").val('');
 										$("#pwre").val('');
@@ -129,42 +171,53 @@
 					</tr>
 					<script type="text/javascript">
 						var emailreg = false;
-						var emaildbchk= 0;
+						var emaildbchk = 0;
 						$("#memail").on("input",function() {
 							var a = $("#memail").val();
 							var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 							if (!regex.exec(a)) {
-								emailreg=false;
+								emailreg = false;
 								$("#email_res").html("이메일 형식이 맞지 않습니다");
 								return;} 
 							else{ 
+								emailreg = true;
 								$("#email_res").html("이메일 형식이 맞습니다.");
-								emailreg=true;
-							}
+								}
 							});
 
 						$("#emailDoubleChk").on("click", function() {
+						    var memailValue = $("#memail").val();
+
+						    if (memailValue === "") {
+						        Swal.fire('이메일을 입력해주세요.', '', 'warning');
+						        return; // 이메일이 비어있을 때 처리 중단
+						    }
+							
 							$.ajax({
-								url : "<%=request.getContextPath()%>/CheckEmail.do",
-														data : {
-															memail : $("#memail").val()
-														},
-														success : function(res) {
-															if(res==1){
-															alert('사용가능한 이메일입니다');
-															emaildbchk=1;
-															}else if(res==0){
-															alert('이미 사용중인 이메일입니다');
-															emaildbchk=2;
-															}else{
-																alert(res);
-															}
-														},
-														error : function() {
-															alert('오류가 발생했습니다');
-														}
-													});
-										});
+								url : "<c:url value='/member/CheckEmail.do'/>",
+								data : {
+									memail: memailValue
+								},
+								success : function(res) {
+									if(res == 1){
+										//alert('사용가능한 이메일입니다');
+										Swal.fire('사용가능한 이메일입니다.', '', 'success');
+										emaildbchk = 1;
+									} else if(res == 0){
+										//alert('이미 사용중인 이메일입니다');
+										Swal.fire('이미 사용중인 이메일입니다.', '', 'warning');
+										emaildbchk = 2;
+									}else{
+										Swal.fire(res, '', 'warning');
+										//alert(res);
+									}
+								},
+								error : function() {
+									//alert('오류가 발생했습니다');
+									Swal.fire('오류가 발생했습니다', '', 'error');
+								}
+							});
+						});
 					</script>
 
 					<tr>
@@ -319,35 +372,43 @@
 	</div>
 	<br><br><br>
 	<script>
-		function goRegister(){
-			if(iddbchk==0){
-				alert('아이디 중복체크를 해주세요.');
-			}else if(iddbchk==2){
-				alert('사용중인 아이디 입니다. 변경해주세요.');
-			}else if(emaildbchk==0){
-				alert('이메일 중복체크를 해주세요.');
-			}else if(emaildbchk==2){
-				alert('사용중인 이메일입니다. 변경해주세요.');
-			}
-			else{ 
-				if(idreg==false){
-					console.log(idreg);
-					alert('아이디 형식을 바르게 입력해주세요');
-				}else if(pwreg==false){
-					console.log(pwreg);
-					alert('비밀번호 형식을 바르게 입력해주세요');
-				}else if(emailreg==false){
-					alert('이메일 형식을 바르게 입력해주세요');
-				}else if($('#f_chk1').prop('checked') == false || $('#f_chk2').prop('checked') == false){
-						alert('필수 약관에 동의 하셔야 합니다.');
-				}else{
-					var frm=document.register_frm;
-					frm.action="<%=request.getContextPath()%>/memberRegister.do";
-					frm.method = "post";
-					frm.submit();
-				}
+	function goRegister(){
+		if(iddbchk == 0){
+			//alert('아이디 중복체크를 해주세요.');
+			Swal.fire('아이디 중복체크를 해주세요.', '', 'info');
+		}else if(iddbchk == 2){
+			Swal.fire('사용중인 아이디 입니다. 변경해주세요.', '', 'info');
+			//alert('사용중인 아이디 입니다. 변경해주세요.');
+		}else if(emaildbchk == 0){
+			Swal.fire('이메일 중복체크를 해주세요.', '', 'info');
+			//alert('이메일 중복체크를 해주세요.');
+		}else if(emaildbchk == 2){
+			Swal.fire('사용중인 이메일입니다. 변경해주세요.', '', 'info');
+			//alert('사용중인 이메일입니다. 변경해주세요.');
+		}
+		else{ 
+			if(idreg == false){
+				console.log(idreg);
+				Swal.fire('아이디 형식을 바르게 입력해주세요.', '', 'info');
+				//alert('아이디 형식을 바르게 입력해주세요');
+			}else if(pwreg == false){
+				console.log(pwreg);
+				Swal.fire('비밀번호 형식을 바르게 입력해주세요.', '', 'info');
+				//alert('비밀번호 형식을 바르게 입력해주세요');
+			}else if(emailreg == false){
+				Swal.fire('이메일 형식을 바르게 입력해주세요.', '', 'info');
+				//alert('이메일 형식을 바르게 입력해주세요');
+			}else if($('#f_chk1').prop('checked') == false || $('#f_chk2').prop('checked') == false){
+				Swal.fire('필수 약관에 동의 하셔야 합니다.', '', 'info');
+				//alert('필수 약관에 동의 하셔야 합니다.');
+			}else{
+				var frm=document.register_frm;
+				frm.action="<c:url value='/member/memberJoin.do'/>";
+				frm.method = "post";
+				frm.submit();
 			}
 		}
+	}
 	</script>
 
 </body>

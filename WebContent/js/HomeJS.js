@@ -63,7 +63,7 @@ $(function() {
 /* 추천도서 누르면 bookDetail 페이지로 이동 */
 $(function() {
 	$('.card').click(function() {
-		location.href = "http://localhost:8088/detailBook.do?b_no=1&query=" + $(this).find('#book-title').text();
+		location.href = "http://localhost:81/LibsPro/book/SearchResult.do?query=" + $(this).find('#book-title').text();
 	})
 });
 
