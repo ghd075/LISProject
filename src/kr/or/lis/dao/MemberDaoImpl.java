@@ -79,9 +79,9 @@ public class MemberDaoImpl implements MemberDao {
 
 
 	@Override
-	public String idSearch(String mname, String memail) {
+	public MemberVO idSearch(String mname, String memail) {
 		SqlSession session = null;
-		String mid = null;
+		MemberVO mvo = null;
 
 		try {
 			session = MybatisUtil.getSqlSession();
@@ -92,7 +92,7 @@ public class MemberDaoImpl implements MemberDao {
 			parameters.put("memail", memail);
 
 			// 파라미터를 전달하여 쿼리 실행
-			mid = session.selectOne("member.findMemberId", parameters);
+			mvo = session.selectOne("member.idSearch", parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -100,13 +100,13 @@ public class MemberDaoImpl implements MemberDao {
 				session.close();
 		}
 
-		return mid;
+		return mvo;
 	}
 
 	@Override
-	public String pwSearch(String mid, String memail) {
+	public MemberVO pwSearch(String mid, String memail) {
 		SqlSession session = null;
-		String mpw = null;
+		MemberVO mvo = null;
 
 		try {
 			session = MybatisUtil.getSqlSession();
@@ -117,7 +117,7 @@ public class MemberDaoImpl implements MemberDao {
 			parameters.put("memail", memail);
 
 			// 파라미터를 전달하여 쿼리 실행
-			mpw = session.selectOne("member.findMemberId", parameters);
+			mvo = session.selectOne("member.pwSearch", parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -125,7 +125,7 @@ public class MemberDaoImpl implements MemberDao {
 				session.close();
 		}
 
-		return mpw;
+		return mvo;
 	}
 
 	@Override

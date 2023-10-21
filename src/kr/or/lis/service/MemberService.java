@@ -10,10 +10,10 @@ public interface MemberService {
 	public MemberVO loginMember(String mid, String mpw);
 	
 	// 아이디 찾기
-	public String idSearch(String mname, String memail);
+	public MemberVO idSearch(String mname, String memail);
 	
 	// 비밀번호 찾기
-	public String pwSearch(String mid, String memail);
+	public MemberVO pwSearch(String mid, String memail);
 	
 	// 임시 비밀번호 찾기
 	public int tmpPwUpdate(String mid,String tempPw);

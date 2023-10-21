@@ -32,12 +32,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String idSearch(String mname, String memail) {
+	public MemberVO idSearch(String mname, String memail) {
 		return dao.idSearch(mname, memail);
 	}
 
 	@Override
-	public String pwSearch(String mid, String memail) {
+	public MemberVO pwSearch(String mid, String memail) {
 		return dao.pwSearch(mid, memail);
 	}
 

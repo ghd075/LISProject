@@ -5,9 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="<%=request.getContextPath()%>/css/reset.css"
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<link href="${ctx}/css/reset.css"
 	rel="stylesheet" type="text/css">
-<link href="<%=request.getContextPath()%>/css/memberSearch.css"
+<link href="${ctx}/css/memberSearch.css"
 	rel="stylesheet" type="text/css">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -15,27 +17,29 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- sweetalert2 사용 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>	
+
 <title>도서 통합 정보 시스템</title>
 <script>
  function goIdSearch(){
-	 var frm=document.idSearchfrm;
-	 frm.action="<%=request.getContextPath()%>
-	/memberIdSearch.do";
-		frm.method = "post";
-		frm.submit();
-	}
+	var frm = document.idSearchfrm;
+	frm.action="<c:url value='/member/IdSearch.do'/>";
+	frm.method = "post";
+	frm.submit();
+}
+
 </script>
 </head>
 <body>
 
 	<form class="form_wrap" name="idSearchfrm">
-		<div class="id_search_res">
-			<c:if test="${not empty id_search_error}">
-				${id_search_error }
-			</c:if>
-
-		</div>
+		<c:if test="${not empty id_search_error}">
+			<script>  
+				Swal.fire('${id_search_error }', '', 'error');
+			</script>
+		</c:if>
 		<!-- 타이틀 -->
 		<h1 class="heroTitle">
 			<span class="heroTitle_dot"><i class="fas fa-book-open"></i></span>&nbsp;&nbsp; <span class="heroTitle_kor">아이디 찾기</span>

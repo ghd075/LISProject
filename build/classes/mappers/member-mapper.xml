@@ -22,7 +22,6 @@
 	, 	mbirthday
 	, 	mgender
 	, 	authority
-	, 	mno
 	) VALUES (
 		#{mid}
 	, 	#{mpw}
@@ -35,7 +34,7 @@
 	, 	#{mbirthday}
 	, 	#{mgender}
 	,	#{authority}
-	, 	mb_seq.nextval)
+	)
   </insert>
  
   <!-- 회원 로그인을 위한 SQL 쿼리 -->
@@ -46,21 +45,21 @@
   </select>
   
   <!-- 아이디 찾기를 위한 SQL 쿼리 -->
-  <select id="idSearch" resultType="String" parameterType="Map">
-    SELECT mid FROM member
+  <select id="idSearch" resultType="MemberVO" parameterType="Map">
+    SELECT * FROM member
     WHERE mname = #{mname} AND memail = #{memail}
   </select>
   
   <!-- 비밀번호 찾기를 위한 SQL 쿼리 -->
-  <select id="pwSearch" resultType="String" parameterType="Map">
-    SELECT mpw FROM member
+  <select id="pwSearch" resultType="MemberVO" parameterType="Map">
+    SELECT * FROM member
     WHERE mid = #{mid} AND memail = #{memail}
   </select>
   
   <!-- 임시 비밀번호로 변경을 위한 SQL 쿼리 -->
   <update id="tmpPwUpdate" parameterType="Map">
     UPDATE member
-    SET mpw = #{mpw}
+    SET mpw = #{tempPw}
     WHERE mid = #{mid}
   </update> 
   

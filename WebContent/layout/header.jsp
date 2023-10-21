@@ -69,6 +69,8 @@ table, td {
 	padding: 0px 5px 0px 5px;
 	font-size: 14px;
 	letter-spacing: -.3px;
+	color: #000;
+	font-weight: 500;
 }
 
 ul.navi li a {
