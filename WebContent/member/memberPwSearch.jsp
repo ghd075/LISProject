@@ -22,10 +22,9 @@
 
 <title>도서 통합 정보 시스템</title>
 <script>
- function goPwSearch(){
-	 var frm=document.pw_search_frm;
-	 frm.action="<%=request.getContextPath()%>
-	/memberPwSearch.do";
+	function goPwSearch(){
+		var frm=document.pw_search_frm;
+		frm.action="<c:url value='/member/PwSearch.do'/>";
 		frm.method = "post";
 		frm.submit();
 	}
@@ -36,7 +35,9 @@
 	<form name="pw_search_frm" class="form_wrap">
 		<div class="pw_search_res">
 			<c:if test="${not empty pw_Search_error}">
-					${pw_Search_error}
+				<script>  
+					Swal.fire('${pw_Search_error}', '', 'error');
+				</script>
 			</c:if>
 		</div>
 		<!-- 타이틀 -->

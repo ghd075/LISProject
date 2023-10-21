@@ -42,7 +42,7 @@
 	<form name="login_frm" class="form_wrap">
 		<c:if test="${not empty login_error}">
 			<script type="text/javascript">
-				Swal.fire('${login_error}', '', 'error');
+				Swal.fire('${login_error}', '', 'info');
 			</script>
 		</c:if>
 		<!-- 타이틀 -->

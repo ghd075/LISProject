@@ -67,11 +67,11 @@
 							var regex = /[A-Za-z0-9]{5,20}/;
 							if (!regex.exec(a)) {
 								idreg = false;
-								$("#id_res").html("아이디 형식이 맞지 않습니다");
+								$("#id_res").html("아이디 형식이 맞지 않습니다").css("color", "red");
 								return;
 							} else {
 								idreg = true;
-								$("#id_res").html("아이디 형식이 맞습니다.");
+								$("#id_res").html("아이디 형식이 맞습니다.").css("color", "blue");
 							}
 						});
 						
@@ -79,9 +79,14 @@
 						    var midValue = $("#mid").val();
 
 						    if (midValue === "") {
-						        Swal.fire('아이디를 입력해주세요.', '', 'warning');
+						        Swal.fire('아이디를 입력해주세요.', '', 'info');
 						        return; // 아이디가 비어있을 때 처리 중단
-						    }							
+						    }
+						    
+						    if (!idreg) {
+						        Swal.fire('아이디 형식을 맞추어 주세요.', '', 'info');
+						        return; // 아이디 형식이 맞지 않을 때 처리 중단
+						    }
 							
 							$.ajax({
 								type : 'post',
@@ -96,7 +101,7 @@
 										Swal.fire('사용가능한 아이디입니다.', '', 'success');
 									}else if(res == 0){
 										iddbchk = 2;
-										Swal.fire('이미 사용중인 아이디입니다.', '', 'warning');
+										Swal.fire('이미 사용중인 아이디입니다.', '', 'info');
 									}else{
 										Swal.fire(res, '', 'warning');
 									}
@@ -133,13 +138,13 @@
 						function() {
 							var a = $("#mpw").val();
 							var regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-							if (!regex.exec(a)) {
+							if (!regex.test(a)) {
 								pwreg = false;
-								$("#pw_res").html('비밀번호 형식이 맞지않습니다.');
+								$("#pw_res").html('비밀번호 형식이 맞지않습니다.').css("color", "red");
 								return;
 							} else {
 								pwreg = true;
-								$("#pw_res").html('비밀번호 형식이 맞습니다.');
+								$("#pw_res").html('비밀번호 형식이 맞습니다.').css("color", "blue");
 							}});
 
 						$("#pwre").focusout(function() {
@@ -148,8 +153,8 @@
 							if (pw1 != "" && pw2 != "") {
 								{
 									if (pw1 != pw2) {
-										Swal.fire('비밀번호를 동일하게 입력해주세요', '', 'warning');/
-										/alert('비밀번호 동일하게 입력해주세요');
+										Swal.fire('비밀번호를 동일하게 입력해주세요', '', 'info');
+										//alert('비밀번호 동일하게 입력해주세요');
 										$("#mpw").focus();
 										$("#mpw").val('');
 										$("#pwre").val('');
@@ -175,13 +180,13 @@
 						$("#memail").on("input",function() {
 							var a = $("#memail").val();
 							var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-							if (!regex.exec(a)) {
+							if (!regex.test(a)) {
 								emailreg = false;
-								$("#email_res").html("이메일 형식이 맞지 않습니다");
+								$("#email_res").html("이메일 형식이 맞지 않습니다").css("color", "red");
 								return;} 
 							else{ 
 								emailreg = true;
-								$("#email_res").html("이메일 형식이 맞습니다.");
+								$("#email_res").html("이메일 형식이 맞습니다.").css("color", "blue");
 								}
 							});
 
@@ -189,8 +194,13 @@
 						    var memailValue = $("#memail").val();
 
 						    if (memailValue === "") {
-						        Swal.fire('이메일을 입력해주세요.', '', 'warning');
+						        Swal.fire('이메일을 입력해주세요.', '', 'info');
 						        return; // 이메일이 비어있을 때 처리 중단
+						    }
+
+						    if (!emailreg) {
+						        Swal.fire('이메일 형식을 맞추어 주세요.', '', 'info');
+						        return; // 이메일 형식이 맞지 않을 때 처리 중단
 						    }
 							
 							$.ajax({
@@ -205,7 +215,7 @@
 										emaildbchk = 1;
 									} else if(res == 0){
 										//alert('이미 사용중인 이메일입니다');
-										Swal.fire('이미 사용중인 이메일입니다.', '', 'warning');
+										Swal.fire('이미 사용중인 이메일입니다.', '', 'info');
 										emaildbchk = 2;
 									}else{
 										Swal.fire(res, '', 'warning');
@@ -334,7 +344,7 @@
 							class="mgender_label"> <input type="radio" name="mgender"
 								id="f" value="2"> <label for="f">여자</label></span><span
 							class="mgender_label"><input type="radio" name="mgender"
-								id="n" value="3"><label for="n">선택안함</label></span></td>
+								id="n" value="3" checked><label for="n">선택안함</label></span></td>
 					</tr>
 					<tr>
 						<th>생년월일</th>

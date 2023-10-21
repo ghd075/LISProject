@@ -130,6 +130,14 @@ $(function(){
 	border: none;
 	border-right: 1px solid #DFDFDF;
 }
+
+details[open] {
+  background-color: #DCDCDC; /* 원하는 배경 색상으로 변경하세요. */
+}
+
+summary {
+   margin: 0!important;
+}
 </style>
  <style>
     /* 아코디안
@@ -470,7 +478,7 @@ summary + * {
 				<!-- HOVERABLE -->
 				<div class="row pb-2">
 					<div class="col">
-						<details>
+						<details style="margin-top: 70px;">
 							<summary>
 								<span data-css-icon="down fill">책소개<i></i></span>
 							</summary>

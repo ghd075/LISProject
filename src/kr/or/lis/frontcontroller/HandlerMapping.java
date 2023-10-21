@@ -12,7 +12,7 @@ import kr.or.lis.controller.member.*;
 public class HandlerMapping {
   private HashMap<String, Controller> mappings;
   public HandlerMapping() {
-	  mappings=new HashMap<String, Controller>();
+	  mappings = new HashMap<String, Controller>();
 	  
 	  /**
 	   * 회원가입/로그인 페이지 관련
@@ -27,9 +27,12 @@ public class HandlerMapping {
 	  mappings.put("/member/memberLoginF.do", new MemberLoginController());				//로그인 기능
 	  mappings.put("/member/memberLogout.do", new MemberLogoutController());			//로그아웃 기능
 	  mappings.put("/member/IdSearch.do", 	new MemberIdSearchController());			//ID찾기 기능
+	  mappings.put("/member/PwSearch.do", 	new MemberPwSearchController());			//PW찾기 기능
+	  mappings.put("/member/memberPwtmpSend.do", new MemberPwtmpSendController());		//임시비밀번호보내기 기능
 	  mappings.put("/member/CheckId.do", new CheckIdController());						//아이디 중복체크 기능
 	  mappings.put("/member/CheckEmail.do", new CheckEmailController());				//이메일 중복체크 기능
 	  mappings.put("/member/memberJoin.do", new MemberJoinController());				//회원가입 기능
+	  
 	  /**
 	   * 도서관 소개 페이지 관련
 	   */
