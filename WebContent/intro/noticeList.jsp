@@ -33,7 +33,7 @@
 <script type="text/javascript">
 function goSearch(){
 	var frm = document.noticeSearch;
-		frm.action="<%=request.getContextPath()%>/intro/noticeSearch.do";
+		frm.action="<c:url value='/intro/noticeSearch.do'/>";
 		frm.method = "post";
 		frm.submit();
 	};
@@ -185,7 +185,7 @@ function goSearch(){
 							<c:if test="${member.authority eq 1}">
 								<div id="nWritebtn">
 									<button type="button" id="nWrite" name="nWrite"
-										onclick="location.href='${ctx}/intro/noticeWrite.jsp'">글쓰기</button>
+										onclick="location.href='${ctx}/intro/noticeWriteF.do'">글쓰기</button>
 								</div>
 							</c:if>
 						</c:if></td>

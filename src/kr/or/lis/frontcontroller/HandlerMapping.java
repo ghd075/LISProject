@@ -42,7 +42,11 @@ public class HandlerMapping {
 	  mappings.put("/intro/noticeList.do", new NoticeListController()); 				// 공지사항 화면 이동
 	  mappings.put("/intro/noticeDetail.do", new NoticeDetailController()); 			// 공지사항 상세화면 이동
 	  mappings.put("/intro/noticeSearch.do", new NoticeSearchController()); 			// 공지사항 검색화면 이동
-	  
+	  mappings.put("/intro/noticeWriteF.do", new NoticeWriteFormController()); 			// 공지사항 글쓰기화면 이동
+	  mappings.put("/intro/noticeWrite.do", new NoticeWriteController()); 				// 공지사항 글쓰기 기능
+	  mappings.put("/intro/noticeDelete.do", new NoticeDeleteController()); 			// 공지사항 글 삭제 기능
+	  mappings.put("/intro/noticeUpdateF.do", new NoticeUpdateFormController()); 		// 공지사항 글 수정화면 기능
+	  mappings.put("/intro/noticeUpdate.do", new NoticeUpdateController()); 			// 공지사항 글 수정 기능
 	  
 	  /**
 	   * 도서 검색
