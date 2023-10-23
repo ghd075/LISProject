@@ -18,14 +18,14 @@ public class FolderDaoImpl implements FolderDao {
 		return dao;
 	}
 	@Override
-	public List<FolderVO> selectByNo(int mno) {
+	public List<FolderVO> findByNo(String mno) {
         SqlSession session = null;
         List<FolderVO> folderList = null;
 
         try {
             session = MybatisUtil.getSqlSession();
             
-            folderList = session.selectList("folder.selectByNo", mno);
+            folderList = session.selectList("folder.findByNo", mno);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -35,7 +35,7 @@ public class FolderDaoImpl implements FolderDao {
 	}
 
 	@Override
-	public int pageByFolder(int mno) {
+	public int pageByFolder(String mno) {
         SqlSession session = null;
         int count = 0;
 

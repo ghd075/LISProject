@@ -9,12 +9,12 @@
  -->
  
 <mapper namespace="folder">
-	<select id="selectByNo" resultType="folderVO">
+	<select id="findByNo" resultType="folderVO" parameterType="String">
 		select * from folder where ml_no = #{mno}  
 	</select>
 
 	<!-- 내서재 페이징처리 -->
-	<select id="pageByfolder" resultType="int">
+	<select id="pageByfolder" resultType="int" parameterType="String">
 		select COUNT(*) from folder where ml_no = #{mno}  
 	</select>
 </mapper>

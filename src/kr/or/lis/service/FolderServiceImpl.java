@@ -20,12 +20,12 @@ public class FolderServiceImpl implements FolderService {
 		return service;
 	}
 	@Override
-	public List<FolderVO> selectByNo(int mno) {
-		return dao.selectByNo(mno);
+	public List<FolderVO> findByNo(String mno) {
+		return dao.findByNo(mno);
 	}
 
 	@Override
-	public int pageByFolder(int mno) {
+	public int pageByFolder(String mno) {
 		return dao.pageByFolder(mno);
 	}
 

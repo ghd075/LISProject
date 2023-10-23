@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 이 문서는 MyBatis에서 처리할 SQL문을 작성하는 문서입니다. -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+	<mapper>태그의 namespace 속성값은 이 문서에 작성된 SQL문을 호출할 때
+	같이 사용되는 이름이다.
+ -->
+ 
+<mapper namespace="borrow">
+   
+   <!-- 연체인지 여부 판단-->
+	<select id="delay" resultType="int" parameterType="String">
+	    select count(*) from (select * from borrow where sysdate > return_date and return_ok='N' or return_ok='P') where mno=#{mno}
+	</select>
+   
+   <!-- 연체일수 계산. -->
+	<select id ="delay2" resultType="int" parameterType="String">
+	   select sum(sysdate- return_date) from (select * from borrow where sysdate > return_date and return_ok='N' or return_ok='P') where mno=#{mno}
+	</select>
+   
+    <!-- 사용자가 대여한 수량  -->
+	<select id="calB_no" resultType="int" parameterType="String">
+		select count(b_no) from BORROW where mno=#{mno}
+	</select>
+
+</mapper>
