@@ -67,6 +67,8 @@ public class HandlerMapping {
 	   */
 	  mappings.put("/book/SearchResult.do", new SearchResultController()); 				// 도서검색 화면 이동
 	  mappings.put("/book/detailBook.do", new DetailBookController()); 					// 도서 상세 화면 이동
+	  mappings.put("/book/insertBorrow.do", new BorrowController()); 					// 도서 대여 기능 
+	  mappings.put("/book/insertBook.do", new InsertBookController()); 					// 도서정보 삽입 기능 
 	 
 	  /**
 	   * 커뮤니티 페이지 관련

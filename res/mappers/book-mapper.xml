@@ -17,6 +17,11 @@
 	<insert id="insertBook" parameterType="BookVO">
 		insert into book
 		values(#{b_no},#{b_title},#{b_publisher},#{b_writer},#{b_year},#{b_price},#{b_image},#{b_detail},#{b_index},#{b_count},#{c_no})
-	</insert>	 
+	</insert>
+	
+	<!-- 대여시 대여 넘버 삽입 -->
+	<select id="getNextBno" resultType="int">
+		select nvl(max(b_no),0)+1 from book
+	</select>	 
 
 </mapper>

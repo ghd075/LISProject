@@ -28,4 +28,9 @@ public class BookServiceImpl implements BookService {
 		return dao.insertBook(b);
 	}
 
+	@Override
+	public int getNextBno() {
+		return dao.getNextBno();
+	}
+
 }

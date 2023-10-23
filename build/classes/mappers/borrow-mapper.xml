@@ -9,6 +9,15 @@
  -->
  
 <mapper namespace="borrow">
+
+	<insert id="insertBorrow" parameterType="BorrowVO">
+	    insert into borrow(bor_no, mno, b_no)
+	    values(#{bor_no}, #{mno}, #{b_no})
+	</insert>
+	
+	 <select id="getNextBorNo" resultType="int">
+	   select nvl(max(bor_no),0)+1 from borrow
+	</select>
    
    <!-- 연체인지 여부 판단-->
 	<select id="delay" resultType="int" parameterType="String">

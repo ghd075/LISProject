@@ -30,11 +30,11 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>	
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>	
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
-
 <script type="text/javascript">
+
 	//전역변수
 	var FOL_NO =1;
-	let cust_no = Number(${cust_no});
+	let mno = '${mno}';
 	//book for DB
 	var b_image;
 	var b_title;
@@ -79,7 +79,46 @@
 	   }
 	   search();
 
-	// 대여 버튼 클릭 이벤트
+		// 대여 누를 시 책으로 저장하게 함
+	   var insertBook = function () {
+	       /*
+	       b_image
+	       b_title
+	       b_writer
+	       b_year
+	       b_price
+	       detail
+	       */
+	       
+	       //alert(detail);
+	       b_writer2 = JSON.stringify(b_writer);
+	       b_writer2 = b_writer2.slice(2, -2);
+	       
+	       // alert(typeof detail);
+	       var data = {
+	           "b_writer": b_writer2,
+	           "b_image": b_image,
+	           "b_title": b_title,
+	           "b_year": b_year,
+	           "b_price": b_price,
+	           "b_detail": detail
+	       };
+	       
+	       $.ajax({
+	           url: "<c:url value='/book/insertBook.do'/>",
+	           dataType: "json",
+	           type: "POST",
+	           data: data,
+	           success: function (data) {
+	               console.log(data);
+	           },
+	           error: function () {
+	               console.log("에러 발생");
+	           }
+	       });
+	   }
+	   
+		// 대여 버튼 클릭 이벤트
 	   $('#borrow').click(function () {
 	       $('#dialog-borrow').dialog({
 	           modal: true,
@@ -95,27 +134,34 @@
 	                       var count = eval(${b.b_count});
 	                       var count2 = eval(${sumbook});
 	                       var b_no = eval(${b.b_no});
-	                       var cust_no = eval(${cust_no});
-	                       var data = { "cust_no": cust_no };
+	                       var mno = '${mno}';
+	                       var data = { "mno": mno };
 
 	                       if (count2 >= 10) {
 	                           alert("대여가능 도서권수를 초과하였습니다");
 	                       } else {
+	                            insertBook();
+	                            
+	                            var b_no = eval(${b.b_no });
+	                            var mno = '${mno}';
+	                    	   
 	                           // 주석 처리된 AJAX 부분
-	                           /*
 	                           $.ajax({
-	                               url: "/insertBorrow",
+	                               url: "<c:url value='/book/insertBorrow.do'/>",
 	                               dataType: "Json",
 	                               data: data,
 	                               type: "POST",
 	                               success: function (data) {
-	                                   alert("대출완료");
+	                                   if (data.result === 1) {
+	                                       alert("대출완료");
+	                                   } else {
+	                                       alert("대출 실패");
+	                                   }
 	                               },
 	                               error: function () {
 	                                   alert("에러");
 	                               }
 	                           });
-	                           */
 	                       }
 	                   }
 	                   $(this).dialog("close");

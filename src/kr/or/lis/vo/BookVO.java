@@ -52,8 +52,8 @@ public class BookVO {
 		return b_year;
 	}
 
-	public void setB_year(Date b_year) {
-		this.b_year = b_year;
+	public void setB_year(Date b_year2) {
+		this.b_year = b_year2;
 	}
 
 	public int getB_price() {

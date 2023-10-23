@@ -2,6 +2,7 @@ package kr.or.lis.service;
 
 import kr.or.lis.dao.BorrowDao;
 import kr.or.lis.dao.BorrowDaoImpl;
+import kr.or.lis.vo.BorrowVO;
 
 public class BorrowServiceImpl implements BorrowService {
 	private BorrowDao dao;
@@ -29,6 +30,16 @@ public class BorrowServiceImpl implements BorrowService {
 	@Override
 	public int delay2(String mno) {
 		return dao.delay2(mno);
+	}
+
+	@Override
+	public int insertBorrow(BorrowVO b) {
+		return dao.insertBorrow(b);
+	}
+
+	@Override
+	public int getNextBorNo() {
+		return dao.getNextBorNo();
 	}
 
 }

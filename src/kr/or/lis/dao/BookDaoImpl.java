@@ -54,4 +54,20 @@ public class BookDaoImpl implements BookDao {
         return cnt;
 	}
 
+	@Override
+	public int getNextBno() {
+        SqlSession session = null;
+        int count = 0;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            count = session.selectOne("book.getNextBno");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return count;
+	}
+
 }
