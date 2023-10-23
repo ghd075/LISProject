@@ -17,8 +17,8 @@ public class BorrowServiceImpl implements BorrowService {
 		return service;
 	}
 	@Override
-	public int calB_no(String mno) {
-		return dao.calB_no(mno);
+	public int calB_no(int bno) {
+		return dao.calB_no(bno);
 	}
 
 	@Override

@@ -24,6 +24,7 @@
 <!-- 구글폰트 전체 기본적용 END -->
 <link rel="stylesheet" type="text/css"
 	href="${ctx}/css/noticeList.css" />
+  <link rel="stylesheet" href="${ctx}/jquery-ui-1.12.1/jquery-ui.min.css">
 <!-- sweetalert2 사용 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>	
@@ -31,53 +32,116 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-//전역변수
-var FOL_NO =1;
-let cust_no = Number(${cust_no});
-//book for DB
-var b_image;
-var b_title;
-var b_writer="";
-var b_year;
-var b_price;
-var detail;
-//책소개 아코디안
-  function setDetailsHeight(selector, wrapper = document) {
-   
-   
-}
-/* Run it */
-setDetailsHeight('details');
-$(function(){
-   
-   
-   <!-- 홈화면에서 책 누르면 자동으로 검색되는 ajax (재성이 추가)-->
-   let search = function() {
-      $.ajax({
-         method: "GET",
-         url: "https://dapi.kakao.com/v3/search/book?target=title",
-         data: { query:  $("#query").val() },
-         headers: {Authorization: "KakaoAK 90602895a3a930f57dd671cea1c2e29b"}
-      })
-         .done(function(msg) {
-            
-        	 $('#b_image').attr("src", msg.documents[0].thumbnail);
-        	 $('#b_title').text("제목: " + msg.documents[0].title);
-        	 $('#b_writer').text("저자: " + msg.documents[0].authors);
-        	 $('#b_year').text("출간일: " + (msg.documents[0].datetime).substr(0, 10));
-        	 $('#b_price').text("가격: " + msg.documents[0].price + "원");
-            $('#detail').text(msg.documents[0].contents);
-            //변수처리
-            b_image = msg.documents[0].thumbnail
-            b_title = msg.documents[0].title
-            b_writer = msg.documents[0].authors
-            b_year = msg.documents[0].datetime
-            b_price = msg.documents[0].price
-            detail = msg.documents[0].contents
-         });
-   }
-   search();
-});
+	//전역변수
+	var FOL_NO =1;
+	let cust_no = Number(${cust_no});
+	//book for DB
+	var b_image;
+	var b_title;
+	var b_writer="";
+	var b_year;
+	var b_price;
+	var detail;
+	//책소개 아코디안
+	  function setDetailsHeight(selector, wrapper = document) {
+	   
+	   
+	}
+	/* Run it */
+	setDetailsHeight('details');
+	$(function(){
+	   
+	   
+	   <!-- 홈화면에서 책 누르면 자동으로 검색되는 ajax (재성이 추가)-->
+	   let search = function() {
+	      $.ajax({
+	         method: "GET",
+	         url: "https://dapi.kakao.com/v3/search/book?target=title",
+	         data: { query:  $("#query").val() },
+	         headers: {Authorization: "KakaoAK 90602895a3a930f57dd671cea1c2e29b"}
+	      })
+	         .done(function(msg) {
+	            
+	        	 $('#b_image').attr("src", msg.documents[0].thumbnail);
+	        	 $('#b_title').text("제목: " + msg.documents[0].title);
+	        	 $('#b_writer').text("저자: " + msg.documents[0].authors);
+	        	 $('#b_year').text("출간일: " + (msg.documents[0].datetime).substr(0, 10));
+	        	 $('#b_price').text("가격: " + msg.documents[0].price + "원");
+	            $('#detail').text(msg.documents[0].contents);
+	            //변수처리
+	            b_image = msg.documents[0].thumbnail
+	            b_title = msg.documents[0].title
+	            b_writer = msg.documents[0].authors
+	            b_year = msg.documents[0].datetime
+	            b_price = msg.documents[0].price
+	            detail = msg.documents[0].contents
+	         });
+	   }
+	   search();
+
+	// 대여 버튼 클릭 이벤트
+	   $('#borrow').click(function () {
+	       $('#dialog-borrow').dialog({
+	           modal: true,
+	           height: 250,
+	           width: 340,
+	           buttons: {
+	               "대여": function () {
+	                   var days = ${days}
+
+	                   if (days > 0) {
+	                       alert("연체일수 " + days + "입니다. 대여가 불가능합니다.")
+	                   } else {
+	                       var count = eval(${b.b_count});
+	                       var count2 = eval(${sumbook});
+	                       var b_no = eval(${b.b_no});
+	                       var cust_no = eval(${cust_no});
+	                       var data = { "cust_no": cust_no };
+
+	                       if (count2 >= 10) {
+	                           alert("대여가능 도서권수를 초과하였습니다");
+	                       } else {
+	                           // 주석 처리된 AJAX 부분
+	                           /*
+	                           $.ajax({
+	                               url: "/insertBorrow",
+	                               dataType: "Json",
+	                               data: data,
+	                               type: "POST",
+	                               success: function (data) {
+	                                   alert("대출완료");
+	                               },
+	                               error: function () {
+	                                   alert("에러");
+	                               }
+	                           });
+	                           */
+	                       }
+	                   }
+	                   $(this).dialog("close");
+	               },
+	               "취소": function () {
+	                   $('.ui-icon-closethick').click();
+	               }
+	           },
+	       });
+	   });
+	
+		// 내서재 추가
+	   $('#my_library').click(function () {
+	       $('#dialog-library').dialog({
+	           modal: true,
+	           show: { effect: "blind", duration: 600 },
+	           height: 400,
+	           width: 550,
+	           buttons: {
+	               /*"내서재보기": function () {
+	                   location.href = 'MyPage_Folder.do?cust_no=${cust_no}&group=50';
+	               }*/
+	           }
+	       });
+	   });
+	});
 </script>
 <style>
 /* 마우스 갖다대면 효과*/
@@ -484,20 +548,54 @@ summary + * {
 							</summary>
 							<div id="detail"></div>
 						</details>
-						<br> <br>
-
+						<br><br>
+		                <c:if test="${not empty mno }"> 
+		                	<button id=my_library class="buttonadd" style="float: left; margin-left: 100px;">
+		                  		<span>내서재 추가</span>
+		                	</button>
+		                </c:if>
+		                <c:if test="${not empty mno }">     
+		                	<button id=borrow class="buttonadd" style="float: left; margin-left: 50px;">
+		                  		<span>북카트에 담기</span>
+		                	</button>
+		                </c:if>
+		                
+             			<!-- 모달 다이얼로그 모음 -->
+             			<!-- 도서대여 클릭시 첫화면 -->
+             			<div id="dialog-borrow" title="도서대여" style='display: none'>
+					    	<img width="85px" height="70px" alt="book image" src="${ctx}/images/borrow.png" style="cursor: default;">
+					        <span style='color: green; font-size: 15pt;'> 대출하시겠습니까? </span>             			
+             			</div>
+             			
+						<!-- 내서재추가 클릭시 폴더 선택 화면 -->
+						<div id="dialog-library" title="내폴더 선택" style='display: none'>
+						    <h3>폴더 목록</h3>
+						    <table width="30%" id="tempList">
+						        <c:forEach var="g" items="${f}">
+						            <tr>
+						                <td>${g.fol_no}</td>
+						                <!-- <td>${g.fol_no}</td> -->
+						                <td><img width="50px" height="60px" alt="book image" src="img/folder.png"></td>
+						                <td id="test" class="folder">${g.fol_name}</td>
+						            </tr>
+						        </c:forEach>
+						    </table>
+						</div>
+             			
+             			
 					</div>
 				</div>
 			</div>
 		</div>
-		<script src="http://code.jquery.com/jquery-3.3.1.min.js"
-			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-			crossorigin="anonymous"></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-			integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-			crossorigin="anonymous"></script>
-		<script type="text/javascript"
-			src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+		integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+		crossorigin="anonymous"></script>
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <script type="text/javascript"   src="${ctx}/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@ package kr.or.lis.dao;
 public interface BorrowDao {
 	
     // 고객번호에 해당하는 대출 번호 조회
-    public int calB_no(String mno);
+    public int calB_no(int b_no);
     
 	// 연체 여부 확인
     public int delay(String mno);

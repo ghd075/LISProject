@@ -19,14 +19,14 @@ public class BorrowDaoImpl implements BorrowDao {
 	}
 	
 	@Override
-	public int calB_no(String mno) {
+	public int calB_no(int b_no) {
         SqlSession session = null;
         int count = 0;
 
         try {
             session = MybatisUtil.getSqlSession();
             
-            count = session.selectOne("borrow.calB_no", mno);
+            count = session.selectOne("borrow.calB_no", b_no);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

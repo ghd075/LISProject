@@ -55,7 +55,7 @@
 		<mapper resource="mappers/uboard-mapper.xml" />
 		<mapper resource="mappers/main-mapper.xml" />
 		<mapper resource="mappers/borrow-mapper.xml" />
-		<mapper resource="mappers/main-mapper.xml" />
+		<mapper resource="mappers/book-mapper.xml" />
 	</mappers>
 	
 </configuration>
