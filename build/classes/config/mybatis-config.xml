@@ -25,6 +25,8 @@
 		<typeAlias type="kr.or.lis.vo.MemberVO" alias="MemberVO"/>
 		<typeAlias type="kr.or.lis.vo.FolderVO" alias="folderVO"/>
 		<typeAlias type="kr.or.lis.vo.ReplyVO" alias="ReplyVO"/>
+		<typeAlias type="kr.or.lis.vo.BookVO" alias="BookVO"/>
+		<typeAlias type="kr.or.lis.vo.BorrowVO" alias="BorrowVO"/>
 	</typeAliases>
 	
 	<!-- DB연결 설정 -->
@@ -51,6 +53,8 @@
 		<mapper resource="mappers/cboard-mapper.xml" />
 		<mapper resource="mappers/fboard-mapper.xml" />
 		<mapper resource="mappers/uboard-mapper.xml" />
+		<mapper resource="mappers/main-mapper.xml" />
+		<mapper resource="mappers/borrow-mapper.xml" />
 		<mapper resource="mappers/main-mapper.xml" />
 	</mappers>
 	
