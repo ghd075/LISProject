@@ -13,5 +13,13 @@
 	<select id="getMainNotice" resultType="NoticeVO">
 		select rownum, nno, ntitle, ndate from (select nno, ntitle, ndate from notice) <![CDATA[where rownum <= 3]]>
 	</select>
+	
+	<select id="getMainCBoard" resultType="NoticeVO">
+		select rownum, nno, ntitle, ndate from (select nno, ntitle, ndate from cboard) <![CDATA[where rownum <= 3]]>
+	</select>
+	
+	<select id="getMainUBoard" resultType="NoticeVO">
+		select rownum, nno, ntitle, ndate from (select nno, ntitle, ndate from uboard) <![CDATA[where rownum <= 3]]>
+	</select>
 
 </mapper>

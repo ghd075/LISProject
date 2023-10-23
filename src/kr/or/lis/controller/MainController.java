@@ -20,9 +20,15 @@ public class MainController implements Controller {
 		
 		MainService noticeService = MainServiceImpl.getInstance();
 		
-		List<NoticeVO> list = noticeService.getMainNotice();
+		List<NoticeVO> noticelist = noticeService.getMainNotice();
+
+		List<NoticeVO> cboardlist = noticeService.getMainCBoard();
 		
-		request.setAttribute("HNlist", list);
+		List<NoticeVO> uboardlist = noticeService.getMainUBoard();
+		
+		request.setAttribute("HNlist", noticelist);
+		request.setAttribute("HMakinglist", cboardlist);
+		request.setAttribute("HMarketlist", uboardlist);
 		
 		return "main/main";
 	}

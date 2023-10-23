@@ -443,7 +443,7 @@ hr {
                               <h4>창작물게시판</h4>
                            </div>
                            <div class="text-right mr-4">
-                              <a href="postList.do?option=p_title&search=&group=20"><small
+                              <a href="${ctx}/community/cBoardList.do"><small
                                  class="text-muted">전체보기 &gt;</small></a>
                            </div>
                         </div>
@@ -454,9 +454,9 @@ hr {
                               end="4" step="1">
                               <tr>
                                  <td class="home_post_title ellipsis"><a
-                                    href="postDetail.do?p_id=${making.p_id}&&group=20">${making.p_title }</a></td>
+                                    href="${ctx}/community/cBoardDetail.do?nno=${making.nno}">${making.ntitle }</a></td>
                                  <td class="home_post_date"><fmt:formatDate
-                                       value="${making.p_regdate }" pattern="YYYY-MM-dd" /></td>
+                                       value="${making.ndate }" pattern="YYYY-MM-dd" /></td>
                               </tr>
                            </c:forEach>
                         </tbody>
@@ -472,7 +472,7 @@ hr {
                               <h4>중고장터</h4>
                            </div>
                            <div class="text-right mr-4">
-                              <a href="postList.do?option=p_title&search=&group=30"><small
+                              <a href="${ctx}/community/uBoardList.do"><small
                                  class="text-muted">전체보기 &gt;</small></a>
                            </div>
                         </div>
@@ -483,9 +483,9 @@ hr {
                               end="4" step="1">
                               <tr>
                                  <td class="home_post_title ellipsis"><a
-                                    href="postDetail.do?p_id=${market.p_id}&&group=30">${market.p_title }</a></td>
+                                    href="${ctx}/community/uBoardDetail.do?nno=${market.nno}">${market.ntitle }</a></td>
                                  <td class="home_post_date"><fmt:formatDate
-                                       value="${market.p_regdate }" pattern="YYYY-MM-dd" /></td>
+                                       value="${market.ndate }" pattern="YYYY-MM-dd" /></td>
                               </tr>
                            </c:forEach>
                         </tbody>

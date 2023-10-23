@@ -38,4 +38,38 @@ public class MainDaoImpl implements MainDao {
         return noticeList;
 	}
 
+	@Override
+	public List<NoticeVO> getMainCBoard() {
+        SqlSession session = null;
+        List<NoticeVO> noticeList = null;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            
+            noticeList = session.selectList("main.getMainCBoard");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return noticeList;
+	}
+
+	@Override
+	public List<NoticeVO> getMainUBoard() {
+        SqlSession session = null;
+        List<NoticeVO> noticeList = null;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            
+            noticeList = session.selectList("main.getMainUBoard");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return noticeList;
+	}
+
 }

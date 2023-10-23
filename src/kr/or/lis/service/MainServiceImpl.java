@@ -25,4 +25,16 @@ public class MainServiceImpl implements MainService {
 		return dao.getMainNotice();
 	}
 
+	@Override
+	public List<NoticeVO> getMainCBoard() {
+		
+		return dao.getMainCBoard();
+	}
+
+	@Override
+	public List<NoticeVO> getMainUBoard() {
+		
+		return dao.getMainUBoard();
+	}
+
 }
