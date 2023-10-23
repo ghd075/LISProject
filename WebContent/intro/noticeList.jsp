@@ -94,11 +94,12 @@ function goSearch(){
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 				</ul>
 			</div>
-
-			<a href="${ctx}/qnaList.do"
-				class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
-				1:1 문의하기
-			</a>
+			<c:if test="${not empty member}">
+				<a href="${ctx}/intro/chatWindow.do""
+					class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
+					1:1 문의하기
+				</a>
+			</c:if>
 		</div>
 
 		<div class="page_section">
@@ -153,19 +154,31 @@ function goSearch(){
 			<div class="layout-pagination">
 			    <div class="pagediv">
 			        <c:choose>
-			            <c:when test="${pageCount > 1}">
-			                <a href="${ctx}/intro/noticeList.do?pageNum=1" class="layout-pagination-button layout-back"><</a>
+			            <c:when test="${startPage != 1}">
+			                <a href="${ctx}/intro/noticeList.do?pageNum=${prev}"
+			                    class="layout-pagination-button layout-back"><</a>
 			            </c:when>
 			            <c:otherwise>
 			                <span class="layout-pagination-button layout-back disabled"><</span>
 			            </c:otherwise>
 			        </c:choose>
 			
-			        <span class="layout-pagination-button current">1</span>
+			        <c:forEach varStatus="s" begin="${startPage}" end="${endPage}" step="1">
+			            <c:choose>
+			                <c:when test="${s.current == PageNum}">
+			                    <span class="layout-pagination-button current">${s.current}</span>
+			                </c:when>
+			                <c:otherwise>
+			                    <a href="${ctx}/intro/noticeList.do?pageNum=${s.current}"
+			                        class="layout-pagination-button">${s.current}</a>
+			                </c:otherwise>
+			            </c:choose>
+			        </c:forEach>
 			
 			        <c:choose>
-			            <c:when test="${pageCount > 1}">
-			                <a href="${ctx}/intro/noticeList.do?pageNum=2" class="layout-pagination-button layout-next">></a>
+			            <c:when test="${next <= pageCount && pageCount > 1}">
+			                <a href="${ctx}/intro/noticeList.do?pageNum=${next}"
+			                    class="layout-pagination-button layout-next">></a>
 			            </c:when>
 			            <c:otherwise>
 			                <span class="layout-pagination-button layout-next disabled">></span>

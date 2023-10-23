@@ -104,19 +104,19 @@ b{
 }
 
 .carousel-image-1 {
-  background: url('../images/ad1.png');
+  background: url('../images/ad1.gif');
   background-color: cadetblue;
   background-size: cover;
 }
 
 .carousel-image-2 {
-  background: url('../images/ad2.png');
+  background: url('../images/ad4.png');
   background-color: darkgoldenrod;
   background-size: cover;
 }
 
 .carousel-image-3 {
-  background: url('../images/ad3.png');
+  background: url('../images/ad5.png');
   background-color: darkseagreen;
   background-size: cover;
 }

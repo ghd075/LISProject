@@ -62,11 +62,12 @@
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 				</ul>
 			</div>
-
-			<a href="${ctx}/intro/qnaList.do"
-				class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
-				1:1 문의하기
-			</a>
+			<c:if test="${not empty member}">
+				<a href="${ctx}/intro/chatWindow.do"
+					class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
+					1:1 문의하기
+				</a>
+			</c:if>
 		</div>
 
 		<div class="page_section faq">

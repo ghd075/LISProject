@@ -23,6 +23,8 @@
 	<typeAliases>
 		<typeAlias type="kr.or.lis.vo.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="kr.or.lis.vo.MemberVO" alias="MemberVO"/>
+		<typeAlias type="kr.or.lis.vo.FolderVO" alias="folderVO"/>
+		<typeAlias type="kr.or.lis.vo.ReplyVO" alias="ReplyVO"/>
 	</typeAliases>
 	
 	<!-- DB연결 설정 -->
@@ -44,6 +46,12 @@
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
 		<mapper resource="mappers/notice-mapper.xml" />
+		<mapper resource="mappers/qna-mapper.xml" />
+		<mapper resource="mappers/folder-mapper.xml" />
+		<mapper resource="mappers/cboard-mapper.xml" />
+		<mapper resource="mappers/fboard-mapper.xml" />
+		<mapper resource="mappers/uboard-mapper.xml" />
+		<mapper resource="mappers/main-mapper.xml" />
 	</mappers>
 	
 </configuration>

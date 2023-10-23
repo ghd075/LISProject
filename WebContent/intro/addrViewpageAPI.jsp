@@ -55,19 +55,20 @@
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 					<li class="list-item"><a href="${ctx}/intro/noticeList.do">공지사항<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/intro/faqList.do">자주하는질문<span
+					<li class="list-item"><a href="${ctx}/intro/faqList.do">자주묻는질문<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/qnaList.do">1:1문의<span
+					<li class="list-item"><a href="${ctx}/intro/qnaList.do">1:1문의<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 					<li class="list-item active"><a href="${ctx}/intro/addrViewpageAPI.do" style="background: #FFFDE4;">오시는길<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 				</ul>
 			</div>
-
-			<a href="${ctx}/qnaList.do"
-				class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
-				1:1 문의하기
-			</a>
+			<c:if test="${not empty member}">
+				<a href="${ctx}/intro/chatWindow.do"
+					class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
+					1:1 문의하기
+				</a>
+			</c:if>
 		</div>
 
 		<div class="page_section">

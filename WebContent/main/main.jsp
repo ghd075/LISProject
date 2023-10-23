@@ -9,6 +9,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<style>
+#foot {
+	clear:both;
+	position: relative;
+	width: 1080px;
+	margin: 0 auto;
+	background-color: white;
+	letter-spacing: -0.4px;
+	
+}
+
+hr {
+	height: 1px;
+	background-color: #425c5a;
+	clear: both;
+}
+
+
+</style>
 <title>메인페이지</title>
 
 <link rel="stylesheet"
@@ -317,9 +336,9 @@
                </div>
             </a>
             <div class="home-tag mb-2" id="phone_a" >
-               <img class="pr-4 m-0" alt="전화번호" src="${ctx}/images/telephone.png" height="30px">전화번호
+               <img class="pr-4 m-0" alt="전화번호" src="${ctx}/images/telephone.png" height="30px">전화번호  : 1544-1000
             </div> 
-            <a href="${ctx}/intro/QnaList.do">
+            <a href="${ctx}/intro/qnaList.do">
                <div class="home-tag mb-2">
                   <img class="pr-4 m-0" alt="묻고답하기" src="${ctx}/images/question.png" height="30px">묻고답하기
                </div>
@@ -342,25 +361,31 @@
                   </ol>
                   <div class="carousel-inner">
                      <div class="carousel-item carousel-image-1 active">
-                        <div class="container">
-                           <div class="carousel-caption d-none d-sm-block mb-5">
-                              <p></p>
-                           </div>
-                        </div>
+	                     <a href="https://www.youtube.com/watch?v=foiDWcJ0Ncw" target="_blank">
+	                        <div class="container">
+	                           <div class="carousel-caption d-none d-sm-block mb-5">
+	                              <p></p>
+	                           </div>
+	                        </div>
+	                     </a>
                      </div>
                      <div class="carousel-item carousel-image-2">
-                        <div class="container">
-                           <div class="carousel-caption d-none d-sm-block mb-5">
-                              <p></p>
-                           </div>
-                        </div>
+	                     <a href="https://www.ddit.or.kr/?gclid=CjwKCAjwp8OpBhAFEiwAG7NaEku4KzJyHmaqc6eZmv8UJ439ihjR72E4w6MvOxFaoR6MRYJnaAKajhoCm0QQAvD_BwE" target="_blank">
+	                        <div class="container">
+	                           <div class="carousel-caption d-none d-sm-block mb-5">
+	                              <p></p>
+	                           </div>
+	                        </div>
+	                     </a>
                      </div>
                      <div class="carousel-item carousel-image-3">
-                        <div class="container">
-                           <div class="carousel-caption mb-5">
-                              <p></p>
-                           </div>
-                        </div>
+	                     <a href="https://www.daejeontour.co.kr/ko/festival/festivalList.do?menuIdx=147" target="_blank">
+	                        <div class="container">
+	                           <div class="carousel-caption mb-5">
+	                              <p></p>
+	                           </div>
+	                        </div>
+	                     </a>
                      </div>
                   </div>
                   <a href="#myCarousel" data-slide="prev"
@@ -390,20 +415,19 @@
                               <h4>공지사항</h4>
                            </div>
                            <div class="text-right mr-4">
-                              <a href="postList.do?option=p_title&search=&group=10"><small
+                              <a href="${ctx}/intro/noticeList.do"><small
                                  class="text-muted">전체보기 &gt;</small></a>
                            </div>
                         </div>
                      </div>
                      <table class="table table-hover">
                         <tbody>
-                           <c:forEach items="${HNlist}" var="notice" begin="0" end="4"
-                              step="1">
+                           <c:forEach items="${HNlist}" var="notice" begin="0" end="4" step="1">
                               <tr>
                                  <td class="home_post_title ellipsis"><a
-                                    href="postDetail.do?p_id=${notice.p_id}&&group=10">${notice.p_title }</a></td>
+                                    href="${ctx}/intro/noticeDetail.do?nno=${notice.nno}">${notice.ntitle }</a></td>
                                  <td class="home_post_date"><fmt:formatDate
-                                       value="${notice.p_regdate }" pattern="YYYY-MM-dd" /></td>
+                                       value="${notice.ndate }" pattern="YYYY-MM-dd" /></td>
                               </tr>
                            </c:forEach>
                         </tbody>
@@ -472,7 +496,7 @@
          </div>
       </section>
    </div>
-
+   
    <!-- FOOTER -->
    <footer id="main-footer" class="text-center p-4 noto-serif">
       <div class="container">

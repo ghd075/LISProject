@@ -28,7 +28,7 @@ public class MemberLoginController implements Controller {
 		
 		System.out.println("아이디 와 비밀번호 : " + mid + ", " + mpw);
 		
-		String login_keep = request.getParameter("login_keep");
+//		String login_keep = request.getParameter("login_keep");
 
 		if (mid == null || mid == "" || mpw == null || mpw == "") {
 			request.setAttribute("login_error", "로그인 정보를 바르게 입력해주세요.");
@@ -53,6 +53,7 @@ public class MemberLoginController implements Controller {
 					nextPage = "memberLogin";
 				} else if(m.getLogin_type() == 2){
 					request.getSession().setAttribute("member", m);
+					request.getSession().setAttribute("mno", m.getMno());
 					nextPage = "redirect:" + ctx + "/LisMain.do";
 				}
 			}

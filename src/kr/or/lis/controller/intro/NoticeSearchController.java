@@ -91,11 +91,7 @@ public class NoticeSearchController implements Controller {
 		
 		// 보내주기
 		if (nSearch == null || nSearch.equals("")) {
-//			HttpSession session = request.getSession();
-//		    session.setAttribute("search_error", "검색어를 입력해주세요");
-			
-//			request.setAttribute("search_error", "검색어를 입력해주세요");
-//			String searchError = request.getAttribute("search_error").toString();
+
 			String encodedSearchError = URLEncoder.encode("검색어를 입력해주세요", "UTF-8");
 		    System.out.println("검색어가 null 인 경우");
 		    nextPage = "redirect:" + ctx + "/intro/noticeList.do?search_error=" + encodedSearchError;

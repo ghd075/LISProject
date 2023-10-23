@@ -26,4 +26,10 @@
 	    <filter-name>encodingFilter</filter-name>
 	    <url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<context-param>
+  		<param-name>CHAT_ADDR</param-name>
+  		<!-- <param-value>ws://192.168.36.110:81/Chat</param-value> -->
+  		<param-value>ws://127.0.0.1:81/Chat</param-value>	
+  	</context-param>
 </web-app>

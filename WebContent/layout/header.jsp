@@ -238,7 +238,7 @@ ul.navi li a:hover {
 								<li><a href="${ctx}/intro/howtoInfo.do">대출/반납/연장</a></li>
 								<li><a href="${ctx}/intro/noticeList.do">공지사항</a></li>
 								<li><a href="${ctx}/intro/faqList.do">자주묻는질문</a></li>
-								<li><a href="#">1:1 문의</a></li>
+								<li><a href="${ctx}/intro/qnaList.do">묻고답하기</a></li>
 								<li><a href="${ctx}/intro/addrViewpageAPI.do">오시는길</a></li>
 							</ul>
 						</li>
@@ -255,11 +255,11 @@ ul.navi li a:hover {
 						</li>
 						<li class="menu_line">|</li>
 						<li>
-							<a href="${ctx}/bookCategory.do">커뮤니티&nbsp;&nbsp;<i class="fas fa-caret-down"></i></a>
+							<a href="${ctx}/community/cBoardList.do">커뮤니티&nbsp;&nbsp;<i class="fas fa-caret-down"></i></a>
 							<ul id="mMainnav_dropdown">
-								<li><a href="${ctx}/bookCategory.do">창작물게시판</a></li>
-								<li><a href="#">중고장터</a></li>
-								<li><a href="#">자유게시판</a></li>
+								<li><a href="${ctx}/community/cBoardList.do">창작물게시판</a></li>
+								<li><a href="${ctx}/community/uBoardList.do">중고장터</a></li>
+								<li><a href="${ctx}/community/fBoardList.do">자유게시판</a></li>
 							</ul>
 						</li>
 					</ul>

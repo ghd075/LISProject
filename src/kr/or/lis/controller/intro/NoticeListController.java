@@ -70,16 +70,6 @@ public class NoticeListController implements Controller {
 		System.out.println(prev + "이전 - 다음" + next);
 		List<NoticeVO> list = noticeService.noticeList(startRnum, endRnum); /* 변경 : 메소드 */
 
-		// 보내주기
-//		HttpSession session = request.getSession(); // 세션 가져오기
-
-		// 세션에 데이터 설정
-//		String search_error = (String) session.getAttribute("search_error");
-//		System.out.println(search_error);
-		
-		// 세션에 데이터 다시 설정
-//		session.setAttribute("search_error", search_error);
-		
 		String search_error = (String) request.getAttribute("search_error");
 		System.out.println(search_error);
 		request.setAttribute("search_error", search_error);
