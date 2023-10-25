@@ -117,7 +117,7 @@
 	           }
 	       });
 	   }
-	   
+
 		// 대여 버튼 클릭 이벤트
 	   $('#borrow').click(function () {
 	       $('#dialog-borrow').dialog({
@@ -170,21 +170,6 @@
 	                   $('.ui-icon-closethick').click();
 	               }
 	           },
-	       });
-	   });
-	
-		// 내서재 추가
-	   $('#my_library').click(function () {
-	       $('#dialog-library').dialog({
-	           modal: true,
-	           show: { effect: "blind", duration: 600 },
-	           height: 400,
-	           width: 550,
-	           buttons: {
-	               /*"내서재보기": function () {
-	                   location.href = 'MyPage_Folder.do?cust_no=${cust_no}&group=50';
-	               }*/
-	           }
 	       });
 	   });
 	});
@@ -595,14 +580,9 @@ summary + * {
 							<div id="detail"></div>
 						</details>
 						<br><br>
-		                <c:if test="${not empty mno }"> 
-		                	<button id=my_library class="buttonadd" style="float: left; margin-left: 100px;">
-		                  		<span>내서재 추가</span>
-		                	</button>
-		                </c:if>
 		                <c:if test="${not empty mno }">     
-		                	<button id=borrow class="buttonadd" style="float: left; margin-left: 50px;">
-		                  		<span>북카트에 담기</span>
+		                	<button id=borrow class="buttonadd" style="float: right; margin-left: 50px;">
+		                  		<span>도서 대여</span>
 		                	</button>
 		                </c:if>
 		                
@@ -612,22 +592,6 @@ summary + * {
 					    	<img width="85px" height="70px" alt="book image" src="${ctx}/images/borrow.png" style="cursor: default;">
 					        <span style='color: green; font-size: 15pt;'> 대출하시겠습니까? </span>             			
              			</div>
-             			
-						<!-- 내서재추가 클릭시 폴더 선택 화면 -->
-						<div id="dialog-library" title="내폴더 선택" style='display: none'>
-						    <h3>폴더 목록</h3>
-						    <table width="30%" id="tempList">
-						        <c:forEach var="g" items="${f}">
-						            <tr>
-						                <td>${g.fol_no}</td>
-						                <!-- <td>${g.fol_no}</td> -->
-						                <td><img width="50px" height="60px" alt="book image" src="img/folder.png"></td>
-						                <td id="test" class="folder">${g.fol_name}</td>
-						            </tr>
-						        </c:forEach>
-						    </table>
-						</div>
-             			
              			
 					</div>
 				</div>

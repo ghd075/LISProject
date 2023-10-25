@@ -206,7 +206,7 @@ ul.navi li a:hover {
 						<ul class="navi">
 							<li>${member.mname}님</li>
 							<li class="menu_line"></li>
-							<li><a href="${ctx}/member/MyOrderList.do">마이페이지</a></li>
+							<li><a href="${ctx}/mypage/borrowList.do">마이페이지</a></li>
 							<li class="menu_line">|</li>
 							<li><a href="${ctx}/member/memberLogout.do">로그아웃</a></li>
 						</ul>

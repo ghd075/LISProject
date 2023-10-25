@@ -34,4 +34,68 @@
 		select count(b_no) from BORROW where b_no = #{b_no}
 	</select>
 
+	<!-- 페이징처리 total 대출중인 대여목록 -->
+	<select id ="getTotalCount" resultType="int" parameterType="String">
+	   select count(*) from borrow where return_ok = 'N' and mno = #{mno}
+	</select>
+	
+    <!-- 대출현황 list-->    
+	<select id="selectBycust_No" resultType="borrowVO2">
+		SELECT
+		*
+		FROM (select rownum n, q.* from (
+				select distinct b.b_title,
+				b.b_image,
+				b.b_publisher,
+				b.b_writer,
+				b.b_price,
+				b.b_detail,
+				b.b_year,
+				a.bor_no,
+				a.b_no,
+				a.bor_date,
+				a.return_date,
+				a.return_ok,
+				a.mno from borrow a, book b where a.b_no = b.b_no and mno = #{mno} and
+				bor_date is not null
+				and (return_ok like 'N' or return_ok like 'P')
+				order by bor_date desc
+				)
+			q)    
+	</select>
+
+	<!-- 반납기능처리 P -->
+	<update id="updateBorrow" parameterType="int">
+		update borrow set return_ok='P' where bor_no=#{bor_no}
+	</update>
+	
+    <!-- 페이징처리 total 대출한 대여목록 -->
+    <select id ="getTotalCount3" resultType="int" parameterType="String">
+        select count(*) from borrow where mno = #{mno} 
+        and sysdate > return_date
+     </select>
+
+	<!-- 대출반납 list -->
+	<select id="selectBycust_No3" resultType="borrowVO2">
+		SELECT
+		*
+		FROM (select rownum n, q.* from (select distinct b.b_title,
+		b.b_image,
+		b.b_publisher,
+		b.b_writer,
+		b.b_price,
+		b.b_detail,
+		b.b_year,
+		a.bor_no,
+		a.b_no,
+		a.bor_date,
+		a.return_date,
+		a.return_ok,
+		a.mno
+		from borrow a, book b
+		where a.b_no = b.b_no and mno = #{mno} and bor_date is not null
+		and sysdate > return_date
+		order by bor_date desc)q) where n between #{start} and #{end}
+	</select>
+
 </mapper>

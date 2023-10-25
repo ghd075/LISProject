@@ -8,6 +8,7 @@ import kr.or.lis.controller.book.*;
 import kr.or.lis.controller.community.*;
 import kr.or.lis.controller.intro.*;
 import kr.or.lis.controller.member.*;
+import kr.or.lis.controller.mypage.BorrowListController;
 
 
 public class HandlerMapping {
@@ -33,6 +34,11 @@ public class HandlerMapping {
 	  mappings.put("/member/CheckId.do", new CheckIdController());						//아이디 중복체크 기능
 	  mappings.put("/member/CheckEmail.do", new CheckEmailController());				//이메일 중복체크 기능
 	  mappings.put("/member/memberJoin.do", new MemberJoinController());				//회원가입 기능
+	  
+	  /**
+	   * 마이페이지 관련
+	   */	  
+	  mappings.put("/mypage/borrowList.do", new BorrowListController());					//대출현황 화면 이동
 	  
 	  /**
 	   * 도서관 소개 페이지 관련

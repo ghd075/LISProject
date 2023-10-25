@@ -1,8 +1,12 @@
 package kr.or.lis.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import kr.or.lis.dao.BorrowDao;
 import kr.or.lis.dao.BorrowDaoImpl;
 import kr.or.lis.vo.BorrowVO;
+import kr.or.lis.vo.BorrowVO2;
 
 public class BorrowServiceImpl implements BorrowService {
 	private BorrowDao dao;
@@ -42,4 +46,29 @@ public class BorrowServiceImpl implements BorrowService {
 		return dao.getNextBorNo();
 	}
 
+	@Override
+	public List<BorrowVO2> selectBycust_No(String mno) {
+		return dao.selectBycust_No(mno);
+	}
+
+	@Override
+	public int getTotalCount(String mno) {
+		return dao.getTotalCount(mno);
+	}
+
+	@Override
+	public int updateBorrow(int bor_no) {
+		return dao.updateBorrow(bor_no);
+	}
+
+	@Override
+	public int getTotalCount3(String mno) {
+		return dao.getTotalCount3(mno);
+	}
+
+	@Override
+	public List<BorrowVO2> selectBycust_No3(HashMap<String, Object> map) {
+		return dao.selectBycust_No3(map);
+	}
+	
 }
