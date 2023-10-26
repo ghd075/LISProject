@@ -93,4 +93,37 @@
 	  WHERE nno = #{nno}
 	</update>
 
+	<!-- 공지사항 댓글 작성  -->
+	<insert id="replyWrite" parameterType="NoticeVO">
+	  INSERT INTO fboardreply (rno,nno, mid, ntitle, ndate, ncontent, nview)
+	  VALUES (freply_seq.nextval,#{nno}, #{mid}, #{ntitle}, SYSTIMESTAMP, #{ncontent}, 0)
+	</insert>
+	
+	<!-- 공지사항 댓글 조회 -->
+	<select id="getReply" parameterType="ReplyVO" resultType="ReplyVO">
+	 SELECT *  FROM fboardreply where nno = #{nno} order by rno desc
+	</select>
+
+	<!-- 공지사항 댓글 삭제  -->
+	<delete id="replyDelete" parameterType="ReplyVO" >
+		delete from fboardreply where rno = #{rno}
+	</delete>
+
+	<!-- 공지사항 댓글 읽기  -->	
+	<select id="getReplyOne" parameterType="ReplyVO" resultType="ReplyVO">
+	 SELECT *  FROM fboardreply where rno = #{rno}
+	</select>
+	
+	<!-- 공지사항 댓글 수정 -->
+	<update id="replyUpdate" parameterType="ReplyVO">
+	  UPDATE fboardreply
+	  SET ncontent = #{ncontent} , ndate = sysdate
+	  WHERE rno = #{rno}
+	</update>	
+	
+	<!-- 공지사항 댓글수 조회  -->
+	<select id="getReplyCnt" parameterType="ReplyVO" resultType="ReplyVO">
+	 SELECT count(*)  FROM fboardreply where nno = #{nno}
+	</select>	
+
 </mapper>

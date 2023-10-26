@@ -27,6 +27,8 @@
 		<typeAlias type="kr.or.lis.vo.ReplyVO" alias="ReplyVO"/>
 		<typeAlias type="kr.or.lis.vo.BookVO" alias="BookVO"/>
 		<typeAlias type="kr.or.lis.vo.BorrowVO" alias="BorrowVO"/>
+		<typeAlias type="kr.or.lis.vo.JoinVO" alias="JoinVO"/>
+		<typeAlias type="kr.or.lis.vo.BorrowVO2" alias="BorrowVO2"/>
 	</typeAliases>
 	
 	<!-- DB연결 설정 -->
@@ -46,16 +48,16 @@
 	<!-- DB에서 처리될 SQL문들이 작성된 mapper파일들을 등록하는 부분 -->
 	<!-- 형식) <mapper resource="경로명/파일명.xml" -->
 	<mappers>
+		<mapper resource="mappers/main-mapper.xml" />
 		<mapper resource="mappers/member-mapper.xml" />
+		<mapper resource="mappers/folder-mapper.xml" />
+		<mapper resource="mappers/book-mapper.xml" />
+		<mapper resource="mappers/borrow-mapper.xml" />
 		<mapper resource="mappers/notice-mapper.xml" />
 		<mapper resource="mappers/qna-mapper.xml" />
-		<mapper resource="mappers/folder-mapper.xml" />
 		<mapper resource="mappers/cboard-mapper.xml" />
 		<mapper resource="mappers/fboard-mapper.xml" />
 		<mapper resource="mappers/uboard-mapper.xml" />
-		<mapper resource="mappers/main-mapper.xml" />
-		<mapper resource="mappers/borrow-mapper.xml" />
-		<mapper resource="mappers/book-mapper.xml" />
 	</mappers>
 	
 </configuration>

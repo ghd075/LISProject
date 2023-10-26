@@ -30,8 +30,8 @@
 	</select>
    
     <!-- 사용자가 대여한 수량  -->
-	<select id="calB_no" resultType="int" parameterType="int">
-		select count(b_no) from BORROW where b_no = #{b_no}
+	<select id="calB_no" resultType="int" parameterType="String">
+		select count(b_no) from BORROW where mno = #{mno}
 	</select>
 
 	<!-- 페이징처리 total 대출중인 대여목록 -->
@@ -97,5 +97,9 @@
 		and sysdate > return_date
 		order by bor_date desc)q) where n between #{start} and #{end}
 	</select>
+	
+	<select id="selBorrowList" resultType="JoinVO">
+		select B.MID,C.B_TITLE,A.BOR_DATE,A.RETURN_OK FROM BORROW A,MEMBER B,BOOK C WHERE A.MNO = B.MNO AND A.B_NO = C.B_NO
+	</select>	
 
 </mapper>

@@ -118,6 +118,8 @@
 	  WHERE rno = #{rno}
 	</update>		
 	
-	
+	<select id="getReplyCnt" parameterType="ReplyVO" resultType="ReplyVO">
+	 SELECT count(*)  FROM qnareply where nno = #{nno}
+	</select>		
 
 </mapper>
