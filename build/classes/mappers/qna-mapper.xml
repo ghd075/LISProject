@@ -111,6 +111,7 @@
 	 SELECT *  FROM qnareply where rno = #{rno}
 	</select>
 	
+	
 	<!-- 공지사항 글 수정 -->
 	<update id="replyUpdate" parameterType="ReplyVO">
 	  UPDATE qnareply

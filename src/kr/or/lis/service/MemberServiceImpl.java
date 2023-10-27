@@ -1,5 +1,7 @@
 package kr.or.lis.service;
 
+import java.util.List;
+
 import kr.or.lis.dao.MemberDao;
 import kr.or.lis.dao.MemberDaoImpl;
 import kr.or.lis.vo.MemberVO;
@@ -55,4 +57,21 @@ public class MemberServiceImpl implements MemberService {
 	public int isEmailChk(String memail) {
 		return dao.isEmailChk(memail);
 	}
+	
+	@Override
+	public List<MemberVO> selMemberList() {
+		return dao.selMemberList();
+	}
+	
+	public MemberVO selMemberOne(String mid)
+	{
+		return dao.selMemberOne(mid);
+	}
+	
+	public int updateMember(MemberVO vo)
+	{
+		return dao.updateMember(vo);
+	}
+	
+	
 }

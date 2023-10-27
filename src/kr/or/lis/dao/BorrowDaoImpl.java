@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.lis.util.MybatisUtil;
 import kr.or.lis.vo.BorrowVO;
+import kr.or.lis.vo.JoinVO;
 import kr.or.lis.vo.BorrowVO2;
 
 public class BorrowDaoImpl implements BorrowDao {
@@ -24,14 +25,14 @@ public class BorrowDaoImpl implements BorrowDao {
 	}
 	
 	@Override
-	public int calB_no(int b_no) {
+	public int calB_no(String mno) {
         SqlSession session = null;
         int count = 0;
 
         try {
             session = MybatisUtil.getSqlSession();
             
-            count = session.selectOne("borrow.calB_no", b_no);
+            count = session.selectOne("borrow.calB_no", mno);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -192,4 +193,21 @@ public class BorrowDaoImpl implements BorrowDao {
 	    return BorrowList;
 	}
 	
+	@Override
+	public List<JoinVO> selBorrowList()
+	{
+        SqlSession session = null;
+        List<JoinVO> list = null;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            list = session.selectList("borrow.selBorrowList");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return list;
+	}
+
 }

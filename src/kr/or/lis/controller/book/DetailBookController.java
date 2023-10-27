@@ -21,13 +21,14 @@ public class DetailBookController implements Controller {
 		BorrowService borrow = BorrowServiceImpl.getInstance();
 		
 		HttpSession session = request.getSession(true);
+		String mno = null;
 		
 		int b_no = Integer.parseInt(request.getParameter("b_no"));
 		
 		if (session.getAttribute("mno") == null) {
             request.setAttribute("days", 0);
 		} else {
-			String mno = (String) session.getAttribute("mno");
+			mno = (String) session.getAttribute("mno");
 			System.out.println("회원번호 가져오기 ==> " + mno);
 			int delay = borrow.delay(mno);
 			//만약 연체가 있으면 값을 싣는다.
@@ -44,7 +45,7 @@ public class DetailBookController implements Controller {
 			 request.setAttribute("f", folder.findByNo(mno));
 		}
 		
-		int b_count2 = borrow.calB_no(b_no);
+		int b_count2 = borrow.calB_no(mno);
 		request.setAttribute("b", book.findByNo(b_no));
 		request.setAttribute("sumbook", b_count2);
 		request.setAttribute("query", request.getParameter("query"));

@@ -284,6 +284,26 @@ private static QnaDaoImpl dao;
         try {
             session = MybatisUtil.getSqlSession();
             res = session.update("qnaboard.replyUpdate", vo);
+            
+            if(res > 0) session.commit(); // 커밋
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return res;
+	}
+	
+	@Override
+	public int getReplyCnt(int nno) {
+        SqlSession session = null;
+        int res = 0;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            res = session.selectOne("qnaboard.getReplyCnt", nno);
+            
+  
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

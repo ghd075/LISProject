@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.lis.util.MybatisUtil;
 import kr.or.lis.vo.NoticeVO;
+import kr.or.lis.vo.ReplyVO;
 
 public class FBoardDaoImpl implements FBoardDao {
 
@@ -182,6 +183,133 @@ public class FBoardDaoImpl implements FBoardDao {
             if (session != null) session.close();
         }
         return cnt;
+	}
+	
+	@Override
+	public int replyWrite(NoticeVO vo) {
+        SqlSession session = null;
+        int cnt = 0;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            cnt = session.insert("fboard.replyWrite", vo);
+            
+            if(cnt > 0) session.commit(); // 커밋
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return cnt;
+	}
+
+	
+	@Override
+	public List<ReplyVO> getReply(int nno) {
+        SqlSession session = null;
+        List<ReplyVO> list = null;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            list = session.selectList("fboard.getReply", nno);
+            
+  
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return list;
+	}
+	
+	@Override
+	public ReplyVO getReplyOne(int rno) {
+        SqlSession session = null;
+        ReplyVO vo = null;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            vo = session.selectOne("fboard.getReplyOne", rno);
+            
+  
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return vo;
+	}
+	
+	@Override
+	public int replyDelete(int nno) {
+        SqlSession session = null;
+        int res = 0;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            res = session.delete("fboard.replyDelete", nno);
+            
+            if(res > 0) session.commit(); // 커밋
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return nno;
+	}
+	
+	@Override
+	public List<ReplyVO> replyDetail(int nno) {
+        SqlSession session = null;
+        List<ReplyVO> list = null;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            list = session.selectList("fboard.replyDetail", nno);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return list;
+	}
+	
+	@Override
+	public int replyUpdate(ReplyVO vo) {
+        SqlSession session = null;
+       int res = 0;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            res = session.update("fboard.replyUpdate", vo);
+            
+            if(res > 0) session.commit(); // 커밋
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return res;
+	}
+	
+	@Override
+	public int getReplyCnt(int nno) {
+        SqlSession session = null;
+        int res = 0;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            res = session.selectOne("fboard.getReplyCnt", nno);
+            
+  
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return res;
 	}
 
 

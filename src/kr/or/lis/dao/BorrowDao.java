@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import kr.or.lis.vo.BorrowVO;
+import kr.or.lis.vo.JoinVO;
 import kr.or.lis.vo.BorrowVO2;
 
 public interface BorrowDao {
@@ -11,7 +12,7 @@ public interface BorrowDao {
 	public int insertBorrow(BorrowVO b);
 	
     // 고객번호에 해당하는 대출 번호 조회
-    public int calB_no(int b_no);
+    public int calB_no(String mno);
     
 	// 연체 여부 확인
     public int delay(String mno);
@@ -22,7 +23,9 @@ public interface BorrowDao {
 	//대여시 대여번호 삽입
     public int getNextBorNo();
     
-    // 고객번호로 반납된 도서 목록 조회
+    public List<JoinVO> selBorrowList();
+    
+  // 고객번호로 반납된 도서 목록 조회
     public List<BorrowVO2> selectBycust_No(String mno);
     
     // 대출 목록의 총 개수 조회

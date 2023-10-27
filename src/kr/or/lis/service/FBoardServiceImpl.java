@@ -5,6 +5,7 @@ import java.util.List;
 import kr.or.lis.dao.FBoardDao;
 import kr.or.lis.dao.FBoardDaoImpl;
 import kr.or.lis.vo.NoticeVO;
+import kr.or.lis.vo.ReplyVO;
 
 public class FBoardServiceImpl implements FBoardService {
 	private FBoardDao dao;
@@ -64,6 +65,41 @@ public class FBoardServiceImpl implements FBoardService {
 	@Override
 	public int viewCount(int nno) {
         return dao.viewCount(nno);
+	}
+	
+	@Override
+	public int replyWrite(NoticeVO vo)
+	{
+        return dao.replyWrite(vo);
+	}
+	
+	@Override
+	public List<ReplyVO> getReply(int nno)
+	{
+        return dao.getReply(nno);
+	}
+	
+	@Override
+	public int replyDelete(int nno)
+	{
+		return dao.replyDelete(nno);
+	}
+	
+	@Override
+	public ReplyVO getReplyOne(int rno)
+	{
+		return dao.getReplyOne(rno);
+	}
+	@Override
+	public int replyUpdate(ReplyVO vo)
+	{
+		return dao.replyUpdate(vo);
+	}
+	
+	@Override
+	public int getReplyCnt(int nno)
+	{
+		return dao.getReplyCnt(nno);
 	}
 
 }

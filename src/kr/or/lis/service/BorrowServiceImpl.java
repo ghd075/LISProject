@@ -6,6 +6,7 @@ import java.util.List;
 import kr.or.lis.dao.BorrowDao;
 import kr.or.lis.dao.BorrowDaoImpl;
 import kr.or.lis.vo.BorrowVO;
+import kr.or.lis.vo.JoinVO;
 import kr.or.lis.vo.BorrowVO2;
 
 public class BorrowServiceImpl implements BorrowService {
@@ -22,8 +23,8 @@ public class BorrowServiceImpl implements BorrowService {
 		return service;
 	}
 	@Override
-	public int calB_no(int bno) {
-		return dao.calB_no(bno);
+	public int calB_no(String mno) {
+		return dao.calB_no(mno);
 	}
 
 	@Override
@@ -45,7 +46,6 @@ public class BorrowServiceImpl implements BorrowService {
 	public int getNextBorNo() {
 		return dao.getNextBorNo();
 	}
-
 	@Override
 	public List<BorrowVO2> selectBycust_No(String mno) {
 		return dao.selectBycust_No(mno);
@@ -71,4 +71,11 @@ public class BorrowServiceImpl implements BorrowService {
 		return dao.selectBycust_No3(map);
 	}
 	
+
+
+	@Override
+	public List<JoinVO> selBorrowList()
+	{
+		return dao.selBorrowList();
+	}
 }

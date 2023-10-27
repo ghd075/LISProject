@@ -41,7 +41,9 @@ public class InsertBookController implements Controller {
 		
         // 2015-12-07T00:00:00.000+09:00 나와서 분리 시켜서 DB에 넣어야합니다.
         StringTokenizer tokenizer = new StringTokenizer(String_b_year, "T");
+        System.out.println("tokenizer : " + tokenizer.toString());
         String firstToken = tokenizer.nextToken();
+        System.out.println("firstToken : " + firstToken);
         
         // 연도를 추출하여 문자열로 저장
         java.sql.Date b_year = java.sql.Date.valueOf(firstToken);

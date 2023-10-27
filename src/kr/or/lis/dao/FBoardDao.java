@@ -3,6 +3,7 @@ package kr.or.lis.dao;
 import java.util.List;
 
 import kr.or.lis.vo.NoticeVO;
+import kr.or.lis.vo.ReplyVO;
 
 public interface FBoardDao {
 	
@@ -32,4 +33,18 @@ public interface FBoardDao {
 	
 	// 조회수 메소드
 	public int viewCount(int nno);
+	
+	public int replyWrite(NoticeVO vo);
+	
+	public List<ReplyVO> getReply(int nno);
+	
+	public int replyDelete(int nno);
+	
+	public List<ReplyVO> replyDetail(int nno);
+	
+	public ReplyVO getReplyOne(int rno);
+	
+	public int replyUpdate(ReplyVO vo);
+	
+	public int getReplyCnt(int nno);
 }

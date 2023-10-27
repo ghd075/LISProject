@@ -1,5 +1,6 @@
 package kr.or.lis.dao;
 
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.lis.util.MybatisUtil;
@@ -44,7 +45,7 @@ public class BookDaoImpl implements BookDao {
             session = MybatisUtil.getSqlSession();
             cnt = session.insert("book.insertBook", b);
             
-            if(cnt > 0) session.commit(); // ì»¤ë°‹
+            if(cnt > 0) session.commit(); // Ä¿¹Ô
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,6 +69,57 @@ public class BookDaoImpl implements BookDao {
             if (session != null) session.close();
         }
         return count;
+	}
+
+	@Override
+	public List<BookVO> findAllRecom() {
+        SqlSession session = null;
+        List<BookVO> bookList = null;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            
+            bookList = session.selectList("book.findAllRecom");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return bookList;
+	}
+
+	@Override
+	public List<BookVO> getPopBook() {
+        SqlSession session = null;
+        List<BookVO> bookList = null;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            
+            bookList = session.selectList("book.getPopBook");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return bookList;
+	}
+
+	@Override
+	public List<BookVO> findAllNew() {
+        SqlSession session = null;
+        List<BookVO> bookList = null;
+
+        try {
+            session = MybatisUtil.getSqlSession();
+            
+            bookList = session.selectList("book.selectAllNew");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null) session.close();
+        }
+        return bookList;
 	}
 
 }

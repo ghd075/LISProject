@@ -68,29 +68,40 @@ private QnaDao dao;
         return dao.viewCount(nno);
 	}
 	
+	@Override
 	public int replyWrite(NoticeVO vo)
 	{
         return dao.replyWrite(vo);
 	}
 	
+	@Override
 	public List<ReplyVO> getReply(int nno)
 	{
         return dao.getReply(nno);
 	}
-
+	
+	@Override
 	public int replyDelete(int nno)
 	{
 		return dao.replyDelete(nno);
 	}
 	
+	@Override
 	public ReplyVO getReplyOne(int rno)
 	{
 		return dao.getReplyOne(rno);
 	}
-	
+	@Override
 	public int replyUpdate(ReplyVO vo)
 	{
 		return dao.replyUpdate(vo);
 	}
+	
+	@Override
+	public int getReplyCnt(int nno)
+	{
+		return dao.getReplyCnt(nno);
+	}
+
 	
 }

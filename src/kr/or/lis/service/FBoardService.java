@@ -3,6 +3,7 @@ package kr.or.lis.service;
 import java.util.List;
 
 import kr.or.lis.vo.NoticeVO;
+import kr.or.lis.vo.ReplyVO;
 
 public interface FBoardService {
 	// 공지사항 검색기능
@@ -31,4 +32,17 @@ public interface FBoardService {
 	
 	// 조회수 메소드
 	public int viewCount(int nno);
+	
+
+	public int replyWrite(NoticeVO vo);
+	
+	public int replyDelete(int nno);
+	
+	public List<ReplyVO> getReply(int nno);
+	
+	public ReplyVO getReplyOne(int rno);
+	
+	public int replyUpdate(ReplyVO vo);
+	
+	public int getReplyCnt(int nno);
 }

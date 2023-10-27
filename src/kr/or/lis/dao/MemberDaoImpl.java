@@ -1,6 +1,7 @@
 package kr.or.lis.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -191,5 +192,69 @@ public class MemberDaoImpl implements MemberDao {
 
 		return count;
 	}
+	
+	@Override
+	public List<MemberVO> selMemberList() {
+		SqlSession session = null;
+		List<MemberVO> list = null;
+
+		try {
+			session = MybatisUtil.getSqlSession();
+			
+			// 파라미터를 전달하여 쿼리 실행
+			list = session.selectList("member.selMemberList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+
+		return list;
+	}
+	
+	@Override
+	public MemberVO selMemberOne(String mid) {
+		SqlSession session = null;
+		MemberVO vo = null;
+
+		try {
+			session = MybatisUtil.getSqlSession();
+			
+			// 파라미터를 전달하여 쿼리 실행
+			vo = session.selectOne("member.selMemberOne",mid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+
+		return vo;
+	}
+	
+	
+	@Override
+	public int updateMember(MemberVO vo) {
+		SqlSession session = null;
+		int res = 0 ;
+
+		try {
+			session = MybatisUtil.getSqlSession();
+			
+			// 파라미터를 전달하여 쿼리 실행
+			res = session.update("member.updateMember",vo);
+			if(res > 0) session.commit(); // 커밋
+			 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+
+		return res;
+	}
+
 
 }

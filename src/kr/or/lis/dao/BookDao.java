@@ -1,15 +1,26 @@
 package kr.or.lis.dao;
 
+import java.util.List;
+
 import kr.or.lis.vo.BookVO;
 
 public interface BookDao {
 	
-	// ë¶ ì •ë³´ ê°€ì ¸ì˜¤ê¸°
+	// ºÏ Á¤º¸ °¡Á®¿À±â
 	public BookVO findByNo(int b_no);
 	
-	// ì±…ë””í…Œì¼ì—ì„œ ì±…ì €ì¥
+	// Ã¥µğÅ×ÀÏ¿¡¼­ Ã¥ÀúÀå
 	public int insertBook(BookVO b);
 	
-	//ëŒ€ì—¬ì‹œ ëŒ€ì—¬ ì±…ë²ˆí˜¸ ì‚½ì…
+	//´ë¿©½Ã ´ë¿© Ã¥¹øÈ£ »ğÀÔ
 	public int getNextBno();
+	
+	// »ç¼­ÃßÃµµµ¼­ ¸ñ·Ï
+	public List<BookVO> findAllRecom();
+	
+	// ÀÌ´ŞÀÇ ÀÎ±âµµ¼­ ¸ñ·Ï	
+	public List<BookVO> getPopBook();
+	
+	// ½ÅÂøµµ¼­
+	public List<BookVO> findAllNew();
 }

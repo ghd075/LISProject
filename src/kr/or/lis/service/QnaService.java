@@ -43,4 +43,6 @@ public interface QnaService {
 		public ReplyVO getReplyOne(int rno);
 		
 		public int replyUpdate(ReplyVO vo);
+		
+		public int getReplyCnt(int nno);
 }

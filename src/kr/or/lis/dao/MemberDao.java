@@ -1,5 +1,7 @@
 package kr.or.lis.dao;
 
+import java.util.List;
+
 import kr.or.lis.vo.MemberVO;
 
 public interface MemberDao {
@@ -24,4 +26,13 @@ public interface MemberDao {
 	
 	// 이메일 중복체크 확인
 	public int isEmailChk(String memail);
+	
+	
+	public List<MemberVO> selMemberList();
+	
+	public MemberVO selMemberOne(String mid);
+	
+	public int updateMember(MemberVO vo);
+	
+	
 }

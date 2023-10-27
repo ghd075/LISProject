@@ -1,26 +1,29 @@
 package kr.or.lis.controller.book;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.or.lis.common.Controller;
+import kr.or.lis.service.BookService;
+import kr.or.lis.service.BookServiceImpl;
+import kr.or.lis.vo.BookVO;
 
-public class SearchResultController implements Controller {
+public class NewbookListController implements Controller {
 
 	@Override
 	public String requestHandler(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String queryValue = request.getParameter("query"); // 또는 원하는 방법으로 값을 가져옴
-		request.setAttribute("query", queryValue);
+		BookService book = BookServiceImpl.getInstance();
+		List<BookVO> booklist = book.findAllNew();
 		
-		//String isbn = (String)request.getAttribute("isbn");
+		request.setAttribute("list", booklist);
 		
-		
-		return "SearchResult";
+		return "Newbooks";
 	}
 
 }

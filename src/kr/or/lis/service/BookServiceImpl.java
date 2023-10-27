@@ -1,5 +1,7 @@
 package kr.or.lis.service;
 
+import java.util.List;
+
 import kr.or.lis.dao.BookDao;
 import kr.or.lis.dao.BookDaoImpl;
 import kr.or.lis.vo.BookVO;
@@ -31,6 +33,21 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public int getNextBno() {
 		return dao.getNextBno();
+	}
+
+	@Override
+	public List<BookVO> findAllRecom() {
+		return dao.findAllRecom();
+	}
+
+	@Override
+	public List<BookVO> getPopBook() {
+		return dao.getPopBook();
+	}
+
+	@Override
+	public List<BookVO> findAllNew() {
+		return dao.findAllNew();
 	}
 
 }
