@@ -8,7 +8,7 @@ import kr.or.lis.controller.book.*;
 import kr.or.lis.controller.community.*;
 import kr.or.lis.controller.intro.*;
 import kr.or.lis.controller.member.*;
-import kr.or.lis.controller.mypage.BorrowListController;
+import kr.or.lis.controller.mypage.*;
 
 
 public class HandlerMapping {
@@ -38,14 +38,25 @@ public class HandlerMapping {
 	  /**
 	   * 마이페이지 관련
 	   */	  
-	  mappings.put("/mypage/borrowList.do", new BorrowListController());					//대출현황 화면 이동
-	  
+	  mappings.put("/mypage/borrowList.do", new BorrowListController());						//대출현황 화면 이동
+	  mappings.put("/mypage/update_borrow.do", new UpdateBorrowController());					//반납기능
+	  mappings.put("/mypage/return_borrowList.do", new ReturnBorrowListController());			//대출/반납 내역 화면 이동
+
+	  /**
+	   * 관리자기능 관련
+	   */	  
+	  mappings.put("/admin/memberList.do", new MemberListController());							// 회원목록조회 화면 이동
+	  mappings.put("/admin/borrowList.do", new AdminBorrowListController());					// 반납내역조회 화면 이동
+	  mappings.put("/admin/memberInfoUpdate.do", new MemberInfoUpdateController());				// 회원 수정 기능
+	  mappings.put("/admin/memberInfoUpdateDone.do", new MemberInfoUpdateDoneController());	  	// 회원 수정 완료
+
 	  /**
 	   * 도서관 소개 페이지 관련
 	   */
 	  mappings.put("/intro/howtoInfo.do", new HowToInfoController()); 					// 반납/대출/연장 화면 이동
 	  mappings.put("/intro/addrViewpageAPI.do", new AddrViewController()); 				// 찾아오시는 길 화면 이동
 	  mappings.put("/intro/faqList.do", new FaqListController()); 						// 자주하는 질문 화면 이동
+	  mappings.put("/intro/libarayInfo.do", new LibarayInfoController()); 				// 시설안내도 화면 이동 
 	  
 	  mappings.put("/intro/noticeList.do", new NoticeListController()); 				// 공지사항 화면 이동
 	  mappings.put("/intro/noticeDetail.do", new NoticeDetailController()); 			// 공지사항 상세화면 이동
@@ -66,6 +77,7 @@ public class HandlerMapping {
 	  mappings.put("/intro/qnaReplyWrite.do", new QnaReplyWriteController()); 			// 묻고답하기 글 수정
 	  mappings.put("/intro/qnaReplyDelete.do", new QnaReplyDeleteController()); 		// 묻고답하기 글 삭제
 	  mappings.put("/intro/qnaReplyUpdate.do", new QnaReplyUpdateController()); 		// 묻고답하기 글 업데이트
+	  mappings.put("/intro/qnaReplyUpdateForm.do", new QnaReplyUpdateFormController()); 		//묻고답하기 화면 이동 
 	  mappings.put("/intro/chatWindow.do", new ChatWindowController()); 				// 1:1 채팅 기능	  
 	  
 	  /**
@@ -75,6 +87,10 @@ public class HandlerMapping {
 	  mappings.put("/book/detailBook.do", new DetailBookController()); 					// 도서 상세 화면 이동
 	  mappings.put("/book/insertBorrow.do", new BorrowController()); 					// 도서 대여 기능 
 	  mappings.put("/book/insertBook.do", new InsertBookController()); 					// 도서정보 삽입 기능 
+	  
+	  mappings.put("/book/recommendedBooks.do", new RecommendedBooksController()); 		// 사서 추천 도서 화면 이동 
+	  mappings.put("/book/popularBook.do", new PopBookController()); 					// 이달의 인기 도서 화면 이동
+	  mappings.put("/book/Newbooks.do", new NewbookListController()); 					// 신간 도서 화면 이동
 	 
 	  /**
 	   * 커뮤니티 페이지 관련
@@ -99,6 +115,12 @@ public class HandlerMapping {
 	  mappings.put("/community/fBoardWrite.do", new FBoardWriteController()); 			// 자유게시판 글쓰기 기능
 	  mappings.put("/community/fBoardDelete.do", new FBoardDeleteController()); 		// 자유게시판 글 삭제 기능
 	  mappings.put("/community/fBoardUpdate.do", new FBoardUpdateController()); 		// 자유게시판 글 수정 기능	  
+	  
+	  mappings.put("/community/fBoardReply.do", new FBoardReplyController()); 						// 자유게시판 댓글 리스트
+	  mappings.put("/community/fBoardReplyWrite.do", new FBoardReplyWriteController()); 			// 자유게시판 댓글 작성 기능
+	  mappings.put("/community/fBoardReplyDelete.do", new FBoardReplyDeleteController()); 			// 자유게시판 댓글 삭제 기능
+	  mappings.put("/community/fBoardReplyUpdate.do", new FBoardReplyUpdateController()); 			// 자유게시판 댓글 수정 기능
+	  mappings.put("/community/fBoardReplyUpdateForm.do", new FBoardReplyUpdateFormController()); 	// 자유게시판 댓글 수정 화면 이동
   }
   public Controller getController(String key) { // key => /memberRegister.do
 	  return mappings.get(key);

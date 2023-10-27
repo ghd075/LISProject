@@ -67,6 +67,8 @@ function goSearch(){
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 					<li class="list-item"><a href="${ctx}/intro/addrViewpageAPI.do">오시는길<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
+							<li class="list-item"><a href="${ctx}/intro/libarayInfo.do"">시설 안내도<span
+					class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 				</ul>
 			</div>
 			<c:if test="${not empty member}">

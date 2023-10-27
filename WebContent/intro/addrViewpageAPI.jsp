@@ -53,22 +53,25 @@
 					<li class="list-item">
 						<a href="${ctx}/intro/howtoInfo.do">대출/반납/연장<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/intro/noticeList.do">공지사항<span
+					<li class="list-item"><a href="${ctx}/intro/noticeList.do" >공지사항<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 					<li class="list-item"><a href="${ctx}/intro/faqList.do">자주묻는질문<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/intro/qnaList.do">1:1문의<span
+					<li class="list-item"><a href="${ctx}/intro/qnaList.do">묻고 답하기<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 					<li class="list-item active"><a href="${ctx}/intro/addrViewpageAPI.do" style="background: #FFFDE4;">오시는길<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
+					<li class="list-item"><a href="${ctx}/intro/libarayInfo.do"">시설 안내도<span
+					class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 				</ul>
 			</div>
+
 			<c:if test="${not empty member}">
-				<a href="${ctx}/intro/chatWindow.do"
-					class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
-					1:1 문의하기
-				</a>
-			</c:if>
+			<a href="${ctx}/intro/chatWindow.do"
+				class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
+				1:1 문의하기
+			</a>
+		</c:if>
 		</div>
 
 		<div class="page_section">

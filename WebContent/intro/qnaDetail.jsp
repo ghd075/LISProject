@@ -47,12 +47,20 @@ function goDelete() {
 		}
 	}	
 
+function startUpdate() {
+	var frm = document.qnaDetail;
+	frm.method = "get";
+	frm.action = "<%=request.getContextPath()%>/intro/qnaUpdate.jsp";
+	frm.submit();
+}
+
+
 function goReply() {
 		var frm = document.qnaDetail;
 			frm.method = "post";
 			frm.action = "<%=request.getContextPath()%>/intro/qnaReply.do";
 			frm.submit();
-	
+			
 	}	
 	
 function goDeleteReply(rno) {
@@ -66,21 +74,14 @@ function goDeleteReply(rno) {
 	}
 }	
 
-function goUpdateReply(rno,nno,mid,ndate,ncontent) {
-	var frm = document.qnaReply
-		frm.method = "post";
-		 frm.action = "<%= request.getContextPath() %>/intro/qnaReplyUpdate.do?rno=" + rno + "&nno=" +nno+ "&mid=" + mid + "&ndate=" + ndate + "&ncontent" + ncontent;
-		frm.submit();
-
-}	
-		
-	
-function startUpdate() {
-	var frm = document.qnaDetail;
+function startUpdateReply(rno,nno) {
+	var frm = document.qnaReply;
 	frm.method = "get";
-	frm.action = "<%=request.getContextPath()%>/intro/qnaUpdate.jsp";
+	frm.action = "<%=request.getContextPath()%>/intro/qnaReplyUpdateForm.do?rno=" + rno + "&nno=" + nno;
 	frm.submit();
+	
 }
+
 </script>
 </head>
 <body>
@@ -115,6 +116,8 @@ function startUpdate() {
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 					<li class="list-item"><a href="${ctx}/intro/addrViewpageAPI.do">오시는길<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
+							<li class="list-item"><a href="${ctx}/intro/libarayInfo.do"">시설 안내도<span
+					class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 				</ul>
 			</div>
 
@@ -186,6 +189,7 @@ function startUpdate() {
 				
 					  <c:forEach items="${qreplyList}" var="v" varStatus="s"><br>
 					  	<div class="CSq1_cont_board">
+					  	<input type="hidden" name="rno" value="${v.rno}">
 					  	<input type="hidden" name="nno" value="${v.nno}">
 						<br>
 						<table style = "height : 40px; vertical-align : middle; border : 2px solid #425c5a">
@@ -208,8 +212,9 @@ function startUpdate() {
 						    
 						    <c:if test="${not empty member}">
 							<c:if test="${member.authority eq 1 || (member.authority eq 0 && ndetail.mid == member.mid)}">
-								  <button type="button" class="b_button" style="margin-right : 10px; margin-top: -30px" onclick="goUpdateReply(${v.rno},${v.nno}${v.mid},${v.ndate},${v.ncontent})" >댓글 수정</button>
-						    <button type="button" class="b_button" style="margin-top: -30px" onclick="goDeleteReply(${v.rno})">댓글 삭제</button>
+							<button type="button" class="b_button" style="margin-right: 10px; margin-top: -30px" onclick="location.href='${ctx}/intro/qnaReplyUpdateForm.do?nno=${v.nno}&rno=${v.rno}'">
+							댓글 수정</button>
+						    <button type="button" class="b_button" style="margin-top: -30px" onclick="goDeleteReply(${v.rno})">댓글 삭제</button> 
 							</c:if>
 							</c:if>
 	

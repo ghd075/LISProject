@@ -186,3 +186,29 @@ tfoot {
 .heroLine {
 	border: 1px solid #8FBC8F;
 }
+
+
+
+.form_btn2 {
+	border: 1px solid #425c5a;
+	background-color: #fff;
+	color: #425c5a;
+	display: inline-block;
+	width: 100px;
+	margin: 10px 5px;
+	vertical-align: top;
+	margin-top: 5px;
+	height: 32px;
+	border-radius: 3px;
+	font-weight: 700;
+	font-size: 12px;
+	line-height: 30px;
+	text-align: center;
+	height: 44px;
+	transition: background-color 0.3s; /* 마우스 오버 시 배경색 전환 효과 */
+}
+
+.form_btn2:hover {
+  background-color: #425c5a; /* 마우스 오버 시 배경색 변경 */
+  color: #fff; /* 마우스 오버 시 글자색 변경 */
+}

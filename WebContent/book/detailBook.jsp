@@ -153,7 +153,14 @@
 	                               type: "POST",
 	                               success: function (data) {
 	                                   if (data.result === 1) {
-	                                       alert("대출완료");
+	                                	   Swal.fire({
+	                                    	   title: '대출완료',
+	                                    	   text: '2층 제3열람실의 담당자에게서 대출 신청한 도서를 찾아가세요.',
+	                                    	   imageUrl: "<%=request.getContextPath()%>/images/도서대여.png",
+	                                    	   imageWidth: 1000,
+	                                    	   imageHeight: 300,
+	                                    	   imageAlt: 'Custom image',
+	                                    	 })
 	                                   } else {
 	                                       alert("대출 실패");
 	                                   }

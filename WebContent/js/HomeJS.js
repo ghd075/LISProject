@@ -56,14 +56,14 @@ $(function() {
 	
 	function performSearch() {
 		console.log("체킁:","http://localhost:81/LibsPro/book/SearchResult.do?query=" + $("#bookName").val());
-		location.href = "http://localhost:81/LibsPro/book/SearchResult.do?query=" + $("#bookName").val();
+		location.href = contextPath + "book/SearchResult.do?query=" + $("#bookName").val();
 	}
 });
 
 /* 추천도서 누르면 bookDetail 페이지로 이동 */
 $(function() {
 	$('.card').click(function() {
-		location.href = "http://localhost:81/LibsPro/book/SearchResult.do?query=" + $(this).find('#book-title').text();
+		location.href = contextPath + "book/SearchResult.do?query=" + $(this).find('#book-title').text();
 	})
 });
 

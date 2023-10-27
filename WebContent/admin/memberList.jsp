@@ -1,5 +1,3 @@
-<%@page import="kr.or.lis.vo.NoticeVO"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,7 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>도서 통합 정보 시스템 - 묻고 답하기</title>
+<title>도서 통합 정보 시스템 - 관리자</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
@@ -33,10 +31,9 @@
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
 <script type="text/javascript">
-
 function goSearch(){
 	var frm = document.noticeSearch;
-		frm.action="<%=request.getContextPath()%>/intro/qnaSearch.do";
+		frm.action="<%=request.getContextPath()%>/intro/noticeSearch.do";
 		frm.method = "post";
 		frm.submit();
 	};
@@ -71,7 +68,7 @@ function goSearch(){
 			<div class="container pt-5">
 				<div class="row">
 					<div class="col-md-6 m-auto text-center page-header-top">
-						<h2>묻고 답하기</h2>
+						<h2>관리자 메뉴</h2>
 					</div>
 				</div>
 			</div>
@@ -81,37 +78,26 @@ function goSearch(){
 
 	<div id="c_main">
 		<div id="c_nav">
-			<h2 class="tit_c_nav">도서관 소개</h2>
+			<h2 class="tit_c_nav">관리자 메뉴</h2>
 			<div class="inner_nav">
 				<ul class="list_menu">
-					<li class="list-item">
-						<a href="${ctx}/intro/howtoInfo.do">대출/반납/연장<span
+					<li class="list-item active">
+						<a href="${ctx}/admin/memberList.do" style="background: #FFFDE4;">회원 정보 조회 및 수정<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/intro/noticeList.do">공지사항<span
+					<li class="list-item"><a href="${ctx}/admin/borrowList.do">도서 대출 정보 조회<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/intro/faqList.do">자주하는질문<span
-							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item active"><a href="${ctx}/intro/qnaList.do" style="background: #FFFDE4;">묻고 답하기<span
-							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/intro/addrViewpageAPI.do">오시는길<span
-							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-							<li class="list-item"><a href="${ctx}/intro/libarayInfo.do"">시설 안내도<span
-					class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 				</ul>
 			</div>
 
-		<c:if test="${not empty member}">
-			<a href="${ctx}/intro/chatWindow.do"
-				class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
-				1:1 문의하기
-			</a>
-		</c:if>
+	
 		</div>
+
+	
 
 		<div class="page_section">
 			<div class="head_aticle">
 				<h2 class="tit">
-					묻고 답하기 <span class="tit_sub"> 묻고 답할 수 있는 공간입니다. </span>
+					회원 정보 조회 및 수정 <span class="tit_sub"> 아이디를 눌러 해당 회원의 정보를 수정할 수 있습니다. </span>
 				</h2>
 			</div>
 			<table width="100%" class="text-center" cellpadding="0" cellspacing="0">
@@ -123,27 +109,33 @@ function goSearch(){
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th>No.</th>
-											<th>제목</th>
-											<th>등록일</th>
-											<th>조회수</th>
+										<td>아이디</td>
+										<td>비밀번호</td>
+										<td>이름</td>
+										<td>이메일</td>
+										<td>휴대폰번호</td>
+										<td>우편번호</td>
+										<td>기본 주소</td>
+										<td>상세주소</td>
 										</tr>
 									</thead>
 									<tbody>
 										<!--목록 뿌리기 -->
-										<c:if test="${not empty qnaList}">
+										<c:if test="${not empty memberList}">
 											<!--변경 : el태그 - servlet이랑 맞추기 -->
-											<c:forEach items="${qnaList}" var="v" varStatus="s">
+											<c:forEach items="${memberList}" var="v" varStatus="s">
 												<!--변경 : el태그 - servlet이랑 맞추기 -->
 												<tr>
-													<td>${v.nno}</td>
-													<td><a
-														href="${ctx}/intro/qnaDetail.do?nno=${v.nno}&pageNum=${s.count}">${v.ntitle}</a></td>
-													<td><fmt:formatDate value="${v.ndate}"
-															pattern="yyyy-MM-dd" var="date" /> ${date}</td>
-													<td>${v.nview}</td>
+													<td>
+													<a href="${ctx}/admin/memberInfoUpdate.do?mid=${v.mid}">${v.mid}</a></td>
+													<td>${v.mpw}</td>
+													<td>${v.mname}</td>
+													<td>${v.memail}</td>
+													<td>${v.mphone}</td>
+													<td>${v.mzip_code}</td>
+													<td>${v.m_first_addr}</td>
+													<td>${v.m_second_addr}</td>
 												</tr>
-											
 											</c:forEach>
 										</c:if>
 									</tbody>
@@ -155,72 +147,7 @@ function goSearch(){
 				</tbody>
 			</table>
 
-			<!--페이징 아래 숫자-->
-			<div class="layout-pagination">
-			    <div class="pagediv">
-			        <c:choose>
-			            <c:when test="${s.current != 1}">
-			                <a href="${ctx}/intro/qnaList.do?pageNum=${prev}"
-			                    class="layout-pagination-button layout-back"><</a>
-			            </c:when>
-			            <c:otherwise>
-			                <span class="layout-pagination-button layout-back disabled"><</span>
-			            </c:otherwise>
-			        </c:choose>
-			
-			        <c:forEach varStatus="s" begin="${startPage}" end="${endPage}" step="1">
-			            <c:choose>
-			                <c:when test="${s.current == PageNum}">
-			                    <span class="layout-pagination-button current">${s.current}</span>
-			                </c:when>
-			                <c:otherwise>
-			                      <a href="${ctx}/intro/qnaList.do?pageNum=${s.current}"
-			                        class="layout-pagination-button">${s.current}</a>
-			                </c:otherwise>
-			            </c:choose>
-			        </c:forEach>
-			
-			        <c:choose>
-			            <c:when test="${next <= pageCount && pageCount > 1}">
-			                 <a href="${ctx}/intro/qnaList.do?pageNum=${endPage}"
-			                    class="layout-pagination-button layout-next">></a>
-			            </c:when>
-			            <c:otherwise>
-			                <span class="layout-pagination-button layout-next disabled">></span>
-			            </c:otherwise>
-			        </c:choose>
-			    </div>
-			</div>
-
-		</div>
-		
-		<table class="board-search board-search2">
-			<tbody>
-				<tr>
-					<td><c:if test="${not empty member}">
-							<c:if test="${member.authority eq 1 || member.authority eq 0}">
-								<div id="nWritebtn">
-									<button type="button" id="nWrite" name="nWrite"
-										onclick="location.href='${ctx}/intro/qnaWrite.jsp'">글쓰기</button>
-								</div>
-							</c:if>
-						</c:if></td>
-					<td>
-						<div class="search_bt">
-							<form name="noticeSearch" action="${ctx}/intro/qnaSearch.do">
-								<input type="text" id="nSearch" name="nSearch"
-									placeholder="검색어를 입력해주세요">
-								<button type="button" id="nSearchbtn" name="nSearchbtn"
-									onclick="goSearch()">
-									<img src="${ctx}/images/Search_white.png"
-										style="width: 15px; height: 15px;">
-								</button>
-							</form>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>		
+			<br><br>
 	</div>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

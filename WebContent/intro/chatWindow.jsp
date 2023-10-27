@@ -41,6 +41,7 @@ window.onload = function() {
     chatWindow.style.width = "400px";
     chatWindow.style.height = "600px";
     chatWindow.style.marginLeft = "300px";
+    chatWindow.style.overflowY = "auto";
     chatMessage = document.getElementById("chatMessage");
     chatId = document.getElementById('chatId').value;    
 }
@@ -228,6 +229,8 @@ webSocket.onmessage = function(event) {
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 					<li class="list-item"><a href="${ctx}/intro/addrViewpageAPI.do">오시는길<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
+					<li class="list-item"><a href="${ctx}/intro/libarayInfo.do"">시설 안내도<span
+					class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 				</ul>
 			</div>
 

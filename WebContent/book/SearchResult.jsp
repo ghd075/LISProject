@@ -310,9 +310,9 @@
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 					<li class="list-item"><a href="${ctx}/book/recommendedBooks.do">사서추천도서<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/book/Newbooks.do">신착도서<span
+					<li class="list-item"><a href="${ctx}/book/Newbooks.do">신간도서<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/intro/popularBook.do">이달의 인기도서<span
+					<li class="list-item"><a href="${ctx}/book/popularBook.do">이달의 인기도서<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
 				</ul>
 			</div>

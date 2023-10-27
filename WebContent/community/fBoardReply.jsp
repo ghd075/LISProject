@@ -31,13 +31,13 @@
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
 <script type="text/javascript">
-	function goRegister(){
-		var frm = document.qnaWrite;
-			frm.action="<%=request.getContextPath()%>/intro/qnaReplyWrite.do";
-			frm.method = "post";
-			frm.submit();
-		}	
-	
+function goRegister(){
+	var frm = document.qnaWrite;
+		frm.action="<%=request.getContextPath()%>/community/fBoardReplyWrite.do";
+		frm.method = "post";
+		frm.submit();
+	}	
+
 </script>
 </head>
 <body>
@@ -66,34 +66,32 @@
 	<div id="wrap">
 		<div id="c_main">
 			<div id="c_nav">
-				<h2 class="tit_c_nav">고객센터</h2>
-				<div class="inner_nav">
+			<h2 class="tit_c_nav">커뮤니티</h2>
+			<div class="inner_nav">
 				<ul class="list_menu">
-					<li class="list-item">
-						<a href="${ctx}/intro/howtoInfo.do">대출/반납/연장<span
+					<li class="list-item ">
+						<a href="${ctx}/community/cBoardList.do" >창작물게시판<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/intro/qnaList.do">공지사항<span
+					<li class="list-item"><a href="${ctx}/community/uBoardList.do">중고장터<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/intro/faqList.do">자주하는질문<span
+					<li class="list-item active"><a href="${ctx}/community/fBoardList.do" style="background: #FFFDE4;">자유게시판<span
 							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item active"><a href="${ctx}/intro/qnaList.do" style="background: #FFFDE4;">묻고 답하기<span
-							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-					<li class="list-item"><a href="${ctx}/intro/addrViewpageAPI.do">오시는길<span
-							class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
-							<li class="list-item"><a href="${ctx}/intro/libarayInfo.do"">시설 안내도<span
-					class="aside_arrow"><i class="fa fa-caret-right"></i></span></a></li>
+					
 				</ul>
 			</div>
 
-				<a href="${ctx}/qnaList.do"
+				<c:if test="${not empty member}">
+			<a href="${ctx}/intro/chatWindow.do"
 				class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
 				1:1 문의하기
 			</a>
-			</div>
+		</c:if>
+		</div>
+		
 			<div class="page_section">
 				<div class="head_aticle">
 					<h2 class="tit">
-						묻고 답하기 <span class="tit_sub"> 묻고 답할 수 있는 공간입니다. </span>
+					자유게시판 <span class="tit_sub"> 자유롭게 글을 작성 할 수 있습니다. </span>
 					</h2>
 				</div>
 				<div class="CSq1_cont_board">
@@ -101,12 +99,12 @@
 						<table style="margin-top: 34px;">
 							<tr>
 							<input type="hidden"
-								name="nno" value="${ndetail.nno}">
+								name="nno" value="${fBdetail.nno}">
 								<td class="qna_title qna_box">제목</td>
 								<td colspan="3" id="ntitle" name="ntitle"
 								style="padding-left: 8px;"><input type="hidden"
-								name="ntitle" value="${ndetail.ntitle}">
-								${ndetail.ntitle}</td>
+								name="ntitle" value="${fBdetail.ntitle}">
+								${fBdetail.ntitle}</td>
 							</tr>
 							<tr>
 								<td class="qna_desc qna_box">내용</td>

@@ -52,6 +52,35 @@ function startUpdate() {
 	frm.action = "<%=request.getContextPath()%>/community/fBoardUpdate.jsp";
 	frm.submit();
 }
+
+
+
+function goReply() 
+{
+		var frm = document.noticeDetail;
+			frm.method = "post";
+			frm.action = "<%=request.getContextPath()%>/community/fBoardReply.do";
+			frm.submit();
+}	
+	
+function goDeleteReply(rno) {
+	var frm = document.qnaReply;
+	if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+		frm.method = "post";
+		 frm.action = "<%= request.getContextPath() %>/community/fBoardReplyDelete.do?rno=" + rno;
+		frm.submit();
+	}else{   //취소
+	    return;
+	}
+}	
+
+function startUpdateReply(rno,nno) {
+	var frm = document.qnaReply;
+	frm.method = "get";
+	frm.action = "<%=request.getContextPath()%>/community/fBoardUpdateForm.do?rno=" + rno + "&nno=" + nno;
+	frm.submit();
+	
+}
 </script>
 </head>
 <body>
@@ -141,14 +170,60 @@ function startUpdate() {
 					<div class="b_button2">
 						<c:if test="${not empty member}">
 							<c:if test="${member.authority eq 1 || (member.authority eq 0 && fBdetail.mid == member.mid)}">
+								<button type="button" class="b_button" onclick="goReply()">답글쓰기</button>		
 								<button type="button" class="b_button" onclick="startUpdate()">수정</button>
-								<button type="button" class="b_button" onclick="goDelete()">삭제</button>
+								<button type="button" class="b_button" onclick="goDelete()">삭제</button>	
+							</c:if>
+							<c:if test="${member.authority eq 0 && fBdetail.mid != member.mid}">
+								<button type="button" class="b_button" onclick="goReply()">답글쓰기</button>
 							</c:if>
 						</c:if>
 						<button type="button" class="b_button" onclick="location.href='<%=request.getContextPath()%>/community/fBoardList.do'">글목록</button>
 					</div>
 				</div>
-			</form>			
+			</form>	
+					<c:if test="${not empty freplyList}">
+				<form name="qnaReply">
+				
+					  <c:forEach items="${freplyList}" var="v" varStatus="s"><br>
+					  	<div class="CSq1_cont_board">
+					  	<input type="hidden" name="rno" value="${v.rno}">
+					  	<input type="hidden" name="nno" value="${v.nno}">
+						<br>
+						<table style = "height : 40px; vertical-align : middle; border : 2px solid #425c5a">
+						<tr>
+							
+							<td style = "vertical-align : middle">작성자</td>
+							<td name="mid" class="replyId" style=" padding-left : 20px; vertical-align: middle;">
+							<input type="hidden" name="mid" value="${v.mid}">${v.mid}
+							</td>
+							<td style = "vertical-align : middle">작성일</td>
+							<td name="ndate" class="replyDate" style = "vertical-align: middle">
+							<fmt:formatDate value="${v.ndate}" pattern="yyyy-MM-dd" var="date" />
+							<input type="hidden" name="ndate" value="${date}"> ${date}</td>
+						</tr>
+						<tr>
+							<td  style = "vertical-align : middle">댓글</td>
+							<td colspan="5" name="ncontent" class="replyComment" style="height: 10px; padding-left : 20px; vertical-align: middle;">
+							<input type="hidden" name="ncontent" value="${v.ncontent}">
+						    <p style="white-space: pre-line;">${v.ncontent}</p>
+						    
+						    <c:if test="${not empty member}">
+							<c:if test="${(member.authority eq 1) || (member.authority eq 0 && v.mid == member.mid)}">
+							<button type="button" class="b_button" style="margin-right: 10px; margin-top: -30px" onclick="location.href='${ctx}/community/fBoardReplyUpdateForm.do?nno=${v.nno}&rno=${v.rno}'">
+							댓글 수정</button>
+						    <button type="button" class="b_button" style="margin-top: -30px" onclick="goDeleteReply(${v.rno})">댓글 삭제</button> 
+							</c:if>
+							</c:if>
+	
+							</td>
+						</tr>
+						</table>
+						</div>
+				</c:forEach>
+				</form>
+				<br>
+		</c:if>	
 		</div>
 	</div>
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"

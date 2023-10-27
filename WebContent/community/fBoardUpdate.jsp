@@ -41,9 +41,9 @@ function goBack() {
 	location.href="<%=request.getContextPath()%>/community/fBoardList.do";
 }
 </script>
-<c:if test="${not empty fBoardUpdate}">
-	<c:forEach items="${fBoardUpdate}">
-		alert(${fBoardUpdate});
+<c:if test="${not empty qnaUpdate}">
+	<c:forEach items="${qnaUpdate}">
+		alert(${qnaUpdate});
 	</c:forEach>
 </c:if>
 </head>
@@ -86,10 +86,12 @@ function goBack() {
 				</ul>
 			</div>
 
-				<a href="${ctx}/qnaList.do"
+			<c:if test="${not empty member}">
+			<a href="${ctx}/intro/chatWindow.do"
 				class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
 				1:1 문의하기
 			</a>
+		</c:if>
 			</div>
 			<div class="page_section">
 				<div class="head_aticle">

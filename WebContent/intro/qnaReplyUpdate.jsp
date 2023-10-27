@@ -1,8 +1,11 @@
+<%@page import="kr.or.lis.vo.ReplyVO"%>
+<%@page import="kr.or.lis.service.QnaServiceImpl"%>
+<%@page import="kr.or.lis.service.QnaService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="ctx" value="${pageContext.request.contextPath	}"/>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,14 +34,35 @@
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
 <script type="text/javascript">
-	function goRegister(){
-		var frm = document.qnaWrite;
-			frm.action="<%=request.getContextPath()%>/intro/qnaReplyWrite.do";
-			frm.method = "post";
-			frm.submit();
-		}	
-	
+<%-- function endUpdate() {
+	var frm = document.nDetialUpdate;
+	frm.action = "<%=request.getContextPath()%>/intro/qnaUpdate.do";
+	frm.method = "post";
+	frm.submit();
+} --%>
+
+function endUpdate(rno,nno) 
+{
+	var frm = document.qnaReply;
+		frm.method = "post";
+		frm.action = "<%= request.getContextPath() %>/intro/qnaReplyUpdate.do?rno="+rno+"&nno=" +nno;
+		frm.submit();
+}	
+
+
+function goBack() {
+	location.href="<%=request.getContextPath()%>/intro/qnaDetail.do?nno=${selReply.nno}";
+}
+
+
 </script>
+
+
+<c:if test="${not empty qnaUpdate}">
+	<c:forEach items="${qnaUpdate}">
+		alert(${qnaUpdate});
+	</c:forEach>
+</c:if>
 </head>
 <body>
 
@@ -85,10 +109,12 @@
 				</ul>
 			</div>
 
-				<a href="${ctx}/qnaList.do"
+				<c:if test="${not empty member}">
+			<a href="${ctx}/intro/chatWindow.do"
 				class="link_inquire"> <span class="emph">도움이 필요하신가요 ?</span>
 				1:1 문의하기
 			</a>
+		</c:if>
 			</div>
 			<div class="page_section">
 				<div class="head_aticle">
@@ -97,27 +123,22 @@
 					</h2>
 				</div>
 				<div class="CSq1_cont_board">
-					<form name="qnaWrite">
-						<table style="margin-top: 34px;">
-							<tr>
-							<input type="hidden"
-								name="nno" value="${ndetail.nno}">
-								<td class="qna_title qna_box">제목</td>
-								<td colspan="3" id="ntitle" name="ntitle"
-								style="padding-left: 8px;"><input type="hidden"
-								name="ntitle" value="${ndetail.ntitle}">
-								${ndetail.ntitle}</td>
-							</tr>
+				<form name="qnaReply">
+					<input type="hidden" name="rno" value="${selReply.rno}">
+						<input type="hidden" name="nno" value="${selReply.nno}">
+						<table class="qnq_board" style="margin-top: 34px;">
 							<tr>
 								<td class="qna_desc qna_box">내용</td>
-								<td colspan="2" style="padding-left: 8px;"><textarea
-										name="ncontent"
-										style="resize: none; width: 640px; height: 350px; border: 1px solid #e8e8e8;"></textarea>
+								<td colspan="2" style="padding-left: 8px;">
+								<textarea cols="50" rows="10" id="ncontent" name="ncontent" style="width: 640px; height: 350px; border: 1px solid #e8e8e8; ">${selReply.ncontent}</textarea>
+								
 								</td>
 							</tr>
 						</table>
 						<div class="subM">
-							<button type="submit" onclick="goRegister();" class="b_button">등록하기</button>
+							<input type="button" onclick="endUpdate(${selReply.rno},${selReply.nno})" value="수정하기"
+								class="b_button"> <input type="button" class="b_button"
+								value="취소" onclick="goBack()">
 						</div>
 					</form>
 				</div>

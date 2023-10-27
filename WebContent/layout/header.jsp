@@ -97,9 +97,9 @@ ul.navi li a:hover {
 
 #mLogo {
 	position: absolute;
-	width: 150px;
-	height: 74px;
-	margin: 0 40%;
+	width: 330px;
+	height: 110px;
+	margin: 0 30%;
 }
 
 /* 메인_네비 */
@@ -213,7 +213,7 @@ ul.navi li a:hover {
 					</c:if>
 					<c:if test="${member.authority eq 1}">
 						<ul class="navi">
-							<li><a href="${ctx}/member/memberList.do">회원관리</a></li>
+							<li><a href="${ctx}/admin/memberList.do">관리자 메뉴</a></li>
 							<li class="menu_line">|</li>
 							<li><a href="${ctx}/member/memberLogout.do">로그아웃</a></li>
 						</ul>
@@ -224,7 +224,7 @@ ul.navi li a:hover {
 		<div id="mHeader2">
 			<div class="mLogoWrap">
 				<a href="${ctx}/LisMain.do"><img
-					src="${ctx}/images/LIS_logo_darkGreen.png;" id="mLogo"
+					src="${ctx}/images/로고4.jpg;" id="mLogo"
 					width="350px" height="74px"></a>
 			</div>
 		</div>
@@ -240,6 +240,7 @@ ul.navi li a:hover {
 								<li><a href="${ctx}/intro/faqList.do">자주묻는질문</a></li>
 								<li><a href="${ctx}/intro/qnaList.do">묻고답하기</a></li>
 								<li><a href="${ctx}/intro/addrViewpageAPI.do">오시는길</a></li>
+								<li><a href="${ctx}/intro/libarayInfo.do">시설안내도</a></li>
 							</ul>
 						</li>
 
@@ -248,9 +249,9 @@ ul.navi li a:hover {
 							<a href="${ctx}/book/SearchResult.do">도서정보&nbsp;&nbsp;<i class="fas fa-caret-down"></i></a>
 							<ul id="mMainnav_dropdown fade-down">
 								<li><a href="${ctx}/book/SearchResult.do">자료검색</a></li>
-								<li><a href="#">사서추천도서</a></li>
-								<li><a href="#">신착도서</a></li>
-								<li><a href="#">이달의인기도서</a></li>
+								<li><a href="${ctx}/book/recommendedBooks.do">사서추천도서</a></li>
+								<li><a href="${ctx}/book/Newbooks.do">신간도서</a></li>
+								<li><a href="${ctx}/book/popularBook.do">이달의인기도서</a></li>
 							</ul>
 						</li>
 						<li class="menu_line">|</li>

@@ -37,13 +37,16 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
 
 <script type="text/javascript">
+const pathname = "/" + window.location.pathname.split("/")[1] + "/";
+const origin = window.location.origin;
 
-     /* 추천도서 누르면 bookDetail 페이지로 이동 */
-     $(function() {
-        $('.card_image-holder').click(function() {
-           location.href = "" + contextPath + "book/detailBook.do?b_no=1&query='" + $(this).find('#book-title').text();
-        })
-     });
+const contextPath = origin + pathname;
+/* 추천도서 누르면 bookDetail 페이지로 이동 */
+$(function() {
+   $('.card_image-holder').click(function() {
+      location.href = contextPath + "book/detailBook.do?b_no=1&query='" + $(this).find('#book-title').text();
+   })
+});
         
   
 <!-- 미로그인시 글쓰기 버튼 누르면 로그인페이지로 이동 -->
@@ -114,19 +117,22 @@ $(function(){
      var data = {"fol_no_arr" : check_val_arr};
      
       $.ajax({
-           url:"/update_borrow",
+           url:"<c:url value='/mypage/update_borrow.do'/>",
            data:data, type:"POST",
            success:function(res){
           if(res == 1) {
-            location.href = "http://localhost:8088/borrowList.do";
-             alert('반납처리에 완료하였습니다.');
+            location.href = contextPath + "mypage/borrowList.do";
+            swal('반납처리에 완료하였습니다.', "", 'success')
+            //alert('반납처리에 완료하였습니다.');
           }
           else if(res == -1){
-             alert('반납처리에 실패하였습니다.');
+       		swal('반납처리에 실패하였습니다.', "", 'error');
+             //alert('반납처리에 실패하였습니다.');
           }
           else if(res == -2){
-           alert('반납이 완벽히 완료되지않았습니다. 폴더를 확인해주세요.');
-             location.href = "http://localhost:8088/borrowList.do";
+        	swal('반납이 완벽히 완료되지않았습니다.', "폴더를 확인해주세요.", 'info');
+           	//alert('반납이 완벽히 완료되지않았습니다. 폴더를 확인해주세요.');
+            location.href = contextPath + "mypage/borrowList.do";
           }
         console.log(check_val_arr);
      }}); 
@@ -156,12 +162,34 @@ $(function(){
 $(function(){
   var manage_btn = $(this).parent().find(button);
   $(manage_btn).click(function(){
-     const check = confirm("반납하시겠습니까?");
+     /*const check = confirm("반납하시겠습니까?");
      if(check){
         alert("완료되었습니다");
      }else{
         alert("취소되었습니다");
-     };
+     };*/
+	  Swal.fire({
+		   title: '반납하시겠습니까?',
+		   text: '',
+		   icon: 'warning',
+		   
+		   showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+		   confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+		   cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+		   confirmButtonText: '승인', // confirm 버튼 텍스트 지정
+		   cancelButtonText: '취소', // cancel 버튼 텍스트 지정
+		   
+		   reverseButtons: true, // 버튼 순서 거꾸로
+		   
+		}).then(result => {
+		   // 만약 Promise리턴을 받으면,
+		   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
+		   
+		      Swal.fire('완료되었습니다.', '', 'success');
+		   } else if(result.isDismissed) {
+			  Swal.fire('취소되었습니다.', '', 'error'); 
+		   }
+		});
   });
 }); 
 </script>
@@ -215,15 +243,13 @@ $(function(){
 			 	</c:if>
 				<c:if test="${not empty b}">
 				    <c:set var="now" value="<%=new java.util.Date()%>" />
-				    <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="now_date" />
+				    <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="now_date"/>
 				    <c:forEach var="b" items="${b}">
 				        <input type="hidden" value="${b.return_date}" id="return_date_ok" />
-				        <fmt:parseDate value="${now_date}" var="strPlanDate" pattern="yyyy-MM-dd" />
-				        <fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
-				        <%-- ${now} --%>
-				        <fmt:parseDate value="${b.return_date}" var="endPlanDate" pattern="yyyy-MM-dd" />
-				        <fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
-				        <%-- ${endDate} --%>
+		               <fmt:parseDate value="${now_date}" var="strPlanDate" pattern="yyyy-MM-dd"/>
+		               <fmt:parseNumber value="${strPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="strDate"></fmt:parseNumber>
+		               <fmt:parseDate value="${b.return_date}" var="endPlanDate" pattern="yyyy-MM-dd" />
+		               <fmt:parseNumber value="${endPlanDate.time / (1000*60*60*24)}" integerOnly="true" var="endDate"></fmt:parseNumber>
 				        <div class="card">
 				            <div class="card_image-holder">
 				                <img class="card_image" src="${b.b_image}" alt="wave" />
